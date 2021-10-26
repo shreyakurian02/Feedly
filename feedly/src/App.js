@@ -1,25 +1,34 @@
-import logo from './logo.svg';
+import React,{useEffect, useState} from 'react';
 import './App.css';
+import axios from "axios";
 
-function App() {
+const App = ()  => {
+  const [sports, setSports] = useState([]);
+  const [national,setNational] = useState([]);
+  const [business,setBusiness] = useState([]);
+  const [world,setWorld] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      const businessData = await axios.get("https://inshortsapi.vercel.app/news?category=business");
+      const sportsData = await axios.get("https://inshortsapi.vercel.app/news?category=sports");
+      const nationalData = await axios.get("https://inshortsapi.vercel.app/news?category=national");
+      const worldData= await axios.get("https://inshortsapi.vercel.app/news?category=world");
+      setBusiness(businessData);
+      setSports(sportsData);
+      setNational(nationalData);
+      setWorld(worldData);
+      setLoading(false);
+    };
+    fetchPosts();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
     </div>
-  );
+  )
 }
 
 export default App;
