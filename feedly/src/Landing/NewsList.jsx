@@ -4,7 +4,7 @@ import axios from 'axios';
 import NewsCard from './NewsCard';
 import { Typography,PageLoader } from "@bigbinary/neetoui/v2";
 
-const National = () => {
+const NewsList = () => {
   const [loading, setLoading] = useState(true);
   const [national,setNational] = useState([]);
   const [sports, setSports] = useState([]);
@@ -46,4 +46,4 @@ const National = () => {
   );
 }
 
-export default National;
+export default NewsList;
