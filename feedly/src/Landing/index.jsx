@@ -41,12 +41,6 @@ const Landing = () => {
           }
         />
       </div>
-
-      <div className="px-40">
-        <div className="w-full">
-          <NewsList className=" border-b-2" />
-        </div>
-      </div>
     </div>
   );
 };
