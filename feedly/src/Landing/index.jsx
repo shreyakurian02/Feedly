@@ -12,7 +12,6 @@ const Landing = () => {
     <div>
     <div className="px-6 border-b">
       <Header
-      //  className="max-h-16"
         title={<Typography className="neeto-ui-text-gray-500">Feed.ly</Typography>}
         actionBlock={
           <div className="flex space-x-1 items-center">
@@ -47,10 +46,10 @@ const Landing = () => {
     </div>
 
 
-  <div className="pt-20 px-40 py-20border border-black">
+  <div className="pt-20 px-40 py-20">
     <Typography style="h2">National News</Typography>
 
-    <div className="flex flex-row py-6">
+    <div className="py-6 w-full">
             <National />
     </div>
 
