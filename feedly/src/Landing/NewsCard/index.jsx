@@ -9,12 +9,11 @@ const NewsCard = ({result,category}) => {
     <>
 <div className="border-b pt-3 pb-12">
 <div className="py-10">
-    <Typography style="h2">{category}</Typography>
+    <Typography style="h2">{category} News</Typography>
     </div>
-
   <div className="flex flex-row">
     <div className="w-1/2">
-      <img src="https://picsum.photos/526/250" alt="National" className=""/>
+      <img src={result[0].imageUrl} alt="National" className="w-full h-72"/>
     </div>
     <div className="px-5 flex flex-col w-1/2 space-y-5">
         <Typography style="h3">{result[0].title}</Typography>

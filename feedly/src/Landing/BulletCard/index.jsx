@@ -1,3 +1,27 @@
+// import React,{useEffect, useState} from 'react';
+// import axios from 'axios';
+// import { Typography,PageLoader } from "@bigbinary/neetoui/v2";
+// import Card from './Card';
+
+// const BulletCard = ({result,category}) => {
+
+//   return (
+//     <div className="py-5 border-b flex flex-row">
+//     <div className="flex flex-col float-left">
+//     {Array(2).fill().map((_,i)=>(
+//       <Card key={i} result={result} index={i}/>
+//     ))}
+//   </div>
+//   <div className="flex flex-col border border-indigo-900">
+//     {Array(2).fill().map((_,i)=>(
+//       <Card key={i} result={result} index={i} />
+//     ))}
+//   </div>
+//   </div>
+//   );
+// }
+
+// export default BulletCard;
 import React,{useEffect, useState} from 'react';
 import axios from 'axios';
 import { Typography,PageLoader } from "@bigbinary/neetoui/v2";
@@ -6,19 +30,7 @@ import Card from './Card';
 const BulletCard = ({result,category}) => {
 
   return (
-  //   <div className="py-5 border-b space-y-2">
-  //   <div className="flex flex-row ">
-  //   {Array(2).fill().map((_,i)=>(
-  //     <Card key={i} result={result} index={i}/>
-  //   ))}
-  // </div>
-  // <div className="flex flex-row border border-black ">
-  //   {Array(2).fill().map((_,i)=>(
-  //     <Card key={i} result={result} index={i} />
-  //   ))}
-  // </div>
-  // </div>
-  <div className="py-5 border-b">
+<div className="py-5 border-b">
 <div className="grid grid-cols-2 gap-12">
         <Card result={result} index={1}/>
         <Card result={result} index={2}/>
