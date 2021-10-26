@@ -12,6 +12,11 @@ const Article = () => {
         <Typography style="h1" className="" >
          {result[index].title}
         </Typography>
+        <Typography style="body3" className="neeto-ui-text-gray-500">{`${result[index].author} at ${result[index].time} on ${result[index].date}`}</Typography>
+        <div className="flex justify-center">
+          <img src={result[index].imageUrl} className="w-2/4 h-80" />
+        </div>
+        <Typography>{Array(5).fill().map((_,i)=>(result[index].content))}</Typography>
         </div>
         <BulletCard category={result[index].category} result={result}/>
     </div>
