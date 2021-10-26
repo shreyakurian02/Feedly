@@ -1,25 +1,15 @@
-import logo from './logo.svg';
+import React,{useEffect, useState} from 'react';
 import './App.css';
+import axios from "axios";
+import Landing from './Landing';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const App = ()  => {
+
+return (
+    <div>
+      <Landing/>
     </div>
-  );
+  )
 }
 
 export default App;
