@@ -1,10 +1,12 @@
 import React,{useEffect, useState} from 'react';
 import axios from 'axios';
 import { Typography,PageLoader } from "@bigbinary/neetoui/v2";
+import BulletCard from '../BulletCard';
 
 const NewsCard = ({result,category}) => {
 
   return (
+    <>
 <div className="border-b pt-3 pb-12">
 <div className="py-10">
     <Typography style="h2">{category}</Typography>
@@ -23,6 +25,8 @@ const NewsCard = ({result,category}) => {
 
   </div>
   </div>
+  <BulletCard result={result} category={category}/>
+  </>
   );
 }
 
