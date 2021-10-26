@@ -5,6 +5,7 @@ import { Button,Tooltip} from "@bigbinary/neetoui/v2";
 import { Search,Notification,Filter } from "@bigbinary/neeto-icons";
 import { Typography } from "@bigbinary/neetoui/v2";
 import National from './National';
+import NewsCard from './NewsCard';
 
 const Landing = () => {
 
@@ -46,13 +47,10 @@ const Landing = () => {
     </div>
 
 
-  <div className="pt-20 px-40 py-20">
-    <Typography style="h2">National News</Typography>
-
-    <div className="py-6 w-full">
-            <National />
+  <div className="px-40">
+    <div className="w-full">
+            <National className=" border-b-2"/>
     </div>
-
     </div>
   </div>
   );
