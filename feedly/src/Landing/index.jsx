@@ -6,9 +6,11 @@ import { Search, Notification, Filter } from "@bigbinary/neeto-icons";
 import { Typography } from "@bigbinary/neetoui/v2";
 import NewsList from "./NewsList";
 import SearchModal from "../Search";
+import FilterPane from "../Filter";
 
 const Landing = () => {
   const [showSearchModal, setShowSearchModal] = useState(false)
+  const [showFilterPane,setShowFilterPane]  = useState(false)
   return (
     <div>
       <div className="px-6 border-b">
@@ -38,6 +40,7 @@ const Landing = () => {
                 size="large"
                 style="secondary"
                 label="Filter"
+                onClick={()=>setShowFilterPane(true)}
                 icon={() => <Filter className="ml-2" size={15} />}
                 tooltipProps={{
                   content: "Filter",
@@ -54,6 +57,15 @@ const Landing = () => {
               setShowSearchModal={setShowSearchModal}
               onClose={() => {
                 setShowSearchModal(false);
+              }}
+            />
+          )}
+
+{showFilterPane && (
+            <FilterPane
+              setShowFilterPane={setShowFilterPane}
+              onClose={() => {
+                setShowFilterPane(false);
               }}
             />
           )}
