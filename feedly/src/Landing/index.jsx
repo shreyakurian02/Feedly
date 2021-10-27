@@ -1,12 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import "../App.css";
 import { Header } from "@bigbinary/neetoui/v2/layouts";
 import { Button, Tooltip } from "@bigbinary/neetoui/v2";
 import { Search, Notification, Filter } from "@bigbinary/neeto-icons";
 import { Typography } from "@bigbinary/neetoui/v2";
 import NewsList from "./NewsList";
+import SearchModal from "../SearchModal";
 
 const Landing = () => {
+  const [showSearchModal, setShowSearchModal] = useState(false)
   return (
     <div>
       <div className="px-6 border-b">
@@ -16,9 +18,14 @@ const Landing = () => {
           }
           actionBlock={
             <div className="flex space-x-1 items-center">
-              <Tooltip content="" followCursor="horizontal" placement="bottom">
-                <Search />
-              </Tooltip>
+              <Button
+              style="text"
+              onClick={()=>setShowSearchModal(true)}
+              icon={() => <Search />}
+              tooltipProps={{
+                content: "Search",
+                placement: "bottom",
+              }}/>
               <Button
                 style="text"
                 icon={() => <Notification />}
@@ -41,6 +48,15 @@ const Landing = () => {
           }
         />
       </div>
+
+      {showSearchModal && (
+            <SearchModal
+              setShowSearchModal={setShowSearchModal}
+              onClose={() => {
+                setShowSearchModal(false);
+              }}
+            />
+          )}
     </div>
   );
 };

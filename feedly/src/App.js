@@ -13,7 +13,7 @@ const App = () => {
       <div className="px-40">
         <Switch>
           <Route exact path="/newsList" component={NewsList} />
-          <Route exact path="/news" component={Article}/>
+          <Route exact path="/news/:title" component={Article}/>
           <Redirect from="/" to="/newsList" />
         </Switch>
       </div>

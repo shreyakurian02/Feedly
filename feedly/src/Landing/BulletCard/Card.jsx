@@ -12,13 +12,9 @@ const Card = ({ result, index }) => {
       <div className="px-5 flex flex-col space-y-2">
         <Typography style="h6">{result[index].title}</Typography>
         <Typography style="body3">{`${result[index].author} at ${result[index].time} on ${result[index].date}`}</Typography>
-        {/* <Typography style="body2" className="neeto-ui-text-secondary-indigo">
-          Read More
-        </Typography> */}
-
         <Link
         to = {{
-          pathname:"/news",
+          pathname:`/news/${result[index].title}`,
           state: {result:result, index:index},
         }}
         >

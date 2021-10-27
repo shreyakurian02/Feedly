@@ -1,8 +1,9 @@
 import React from "react";
-import { Typography} from "@bigbinary/neetoui/v2";
+import { Typography,Button} from "@bigbinary/neetoui/v2";
 import BulletCard from "../BulletCard";
+import { Link } from "react-router-dom";
 
-const NewsCard = ({ result, category }) => {
+const NewsCard = ({ result, category}) => {
   return (
     <>
       <div className="border-b pt-3 pb-12">
@@ -13,7 +14,7 @@ const NewsCard = ({ result, category }) => {
           <div className="w-1/2">
             <img
               src={result[0].imageUrl}
-              alt="National"
+              alt=""
               className="w-full h-72"
             />
           </div>
@@ -26,16 +27,22 @@ const NewsCard = ({ result, category }) => {
             <Typography style="body2" className="">
               {result[0].content.slice(0, 300)}...
             </Typography>
-            <Typography
-              style="body2"
-              className="neeto-ui-text-secondary-indigo"
-            >
-              Read More
-            </Typography>
+            <Link
+        to = {{
+          pathname:`/news/${result[0].title}`,
+          state: {result:result, index:0},
+        }}
+        >
+       <Button
+          label="Read More"
+          style="link"
+          className="neeto-ui-text-secondary-indigo"
+        />
+        </Link>
           </div>
         </div>
       </div>
-      <BulletCard result={result} category={category} />
+      <BulletCard result={result} category={category} MainArticleId={0}/>
     </>
   );
 };
