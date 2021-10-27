@@ -15,7 +15,7 @@ const Article = () => {
           style="text"
           className = "ml-2 neeto-ui-text-gray-500"
            icon={() => <Copy size={20}/>}
-           onClick={() => {      navigator.clipboard.writeText(result[index].readMoreUrl);}}
+           onClick={() => {navigator.clipboard.writeText(result[index].readMoreUrl);}}
          />
          </Typography>
         <Typography style="body3" className="neeto-ui-text-gray-500">{`${result[index].author} at ${result[index].time} on ${result[index].date}`}</Typography>
