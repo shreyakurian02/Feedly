@@ -5,7 +5,7 @@ import { Button, Tooltip } from "@bigbinary/neetoui/v2";
 import { Search, Notification, Filter } from "@bigbinary/neeto-icons";
 import { Typography } from "@bigbinary/neetoui/v2";
 import NewsList from "./NewsList";
-import SearchModal from "../SearchModal";
+import SearchModal from "../Search";
 
 const Landing = () => {
   const [showSearchModal, setShowSearchModal] = useState(false)

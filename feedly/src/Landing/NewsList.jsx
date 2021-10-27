@@ -12,7 +12,7 @@ const NewsList = () => {
   const [world,setWorld] = useState([]);
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchNews = async () => {
       setLoading(true);
       const nationalData = await axios.get("https://inshortsapi.vercel.app/news?category=national");
       const businessData = await axios.get("https://inshortsapi.vercel.app/news?category=business");
@@ -24,7 +24,7 @@ const NewsList = () => {
       setWorld(worldData.data.data);
       setLoading(false);
     };
-    fetchPosts();
+    fetchNews();
   }, []);
 
 
