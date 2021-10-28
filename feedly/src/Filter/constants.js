@@ -9,6 +9,6 @@ const VALIDATION_SCHEMA = yup.object({
 const INITIAL_VALUES = {
   name: "",
   email: "",
-  message: ""
+  message: "",
 };
 export {VALIDATION_SCHEMA, INITIAL_VALUES };

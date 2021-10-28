@@ -16,11 +16,13 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
   ];
 
   const [filteredCategories, setFilteredCategories] = useState([]);
+  const [isArchived,setIsArchived] = useState(false)
 
   useEffect(() => {
     setFilteredCategories(
       JSON.parse(window.localStorage.getItem("filteredCategories"))
     );
+    setIsArchived(window.localStorage.getItem("isArchived"))
   }, []);
 
   useEffect(() => {
@@ -30,6 +32,14 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
     );
   }, [filteredCategories]);
 
+  useEffect(() => {
+    window.localStorage.setItem(
+      "isArchived",
+      isArchived
+    );
+    console.log(`archived:${isArchived}`)
+  }, [isArchived]);
+
   const handleFilter = (e) => {
     let id = e.target.id;
     if (e.target.checked) {
@@ -38,6 +48,17 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
     } else {
       var filtered = filteredCategories.filter((id) => id !== e.target.id);
       setFilteredCategories(filtered);
+    }
+  };
+
+  const handleArchived = (e) => {
+    let id = e.target.id;
+    console.log(`archived:${isArchived}`)
+    console.log(`checked:${id}`)
+    if (e.target.checked) {
+        setIsArchived(true);
+    } else {
+      setIsArchived(false);
     }
   };
 
@@ -74,14 +95,13 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
           <div className="pl-4 py-5 border-t w-full">
             <Checkbox
               id={8}
+              checked={isArchived}
               label={
                 <Typography style="h5" className="neeto-ui-text-black">
                   Include archived articles
                 </Typography>
               }
-              onChange={(e) => {
-                handleFilter(e);
-              }}
+              onChange={(e)=>handleArchived(e)}
             />
           </div>
         </Pane.Body>
@@ -89,7 +109,7 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
           <Link
             to={{
               pathname: "/filtered",
-              state: { filteredCategories: filteredCategories },
+              state: { filteredCategories: filteredCategories, isArchived:isArchived },
             }}
           >
             <Button

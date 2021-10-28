@@ -22,16 +22,21 @@ const FilteredNews = () => {
     "world",
     "technology",
   ];
-  const { filteredCategories } = useLocation().state;
-    useEffect(()=>{
-      const fetchNews = async (category) => {
-      const data = await axios.get(`https://inshortsapi.vercel.app/news?category=${categories[category]}`)
-      if(!filteredNews.includes(data.data)) setFilteredNews( filteredNews => [...filteredNews, data.data])
-    }
-    setFilteredNews([])
-    filteredCategories.forEach((category)=>fetchNews(category))
+  const { filteredCategories, isArchived } = useLocation().state;
+  //   useEffect(()=>{
+  //     const fetchNews = async (category) => {
+  //     const data = await axios.get(`https://inshortsapi.vercel.app/news?category=${categories[category]}`)
+  //     if(!filteredNews.includes(data.data)) setFilteredNews( filteredNews => [...filteredNews, data.data])
+  //   }
+  //   setFilteredNews([])
+  //   filteredCategories.forEach((category)=>fetchNews(category))
+  //   if (!filteredCategories.includes(String(8))){
+  //     console.log(filteredNews)
+  //   }
 
-  },[filteredCategories])
+  // },[filteredCategories])
+
+
 
   const handleClose = (e) => {
     //To implement
@@ -41,6 +46,7 @@ const FilteredNews = () => {
     return (
       <>
         <div className="flex justify-center py-16">
+
           <div className="space-y-5 flex flex-col justify-center">
             <img src={NoNews} alt="No News" className="" />
             <Typography style="h3">No News Articles Found</Typography>
@@ -73,7 +79,14 @@ const FilteredNews = () => {
             onClose={(e) => handleClose(e)}
           />
         ))}
+        {isArchived?
+        <Tag
+            className="mr-5 mt-5"
+            label="Archived"
+            onClose={(e) => handleClose(e)}
+          />:null}
       </div>
+      {console.log(filteredNews)}
       {filteredNews.map((news, i) => (
         <div>
           <NewsCard

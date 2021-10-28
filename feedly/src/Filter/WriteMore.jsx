@@ -5,13 +5,19 @@ import { Formik, Form } from "formik";
 import { Button, Pane, Typography, Toastr } from "@bigbinary/neetoui/v2";
 import { Input, Select,Textarea } from "@bigbinary/neetoui/v2/formik";
 import { INITIAL_VALUES,VALIDATION_SCHEMA } from "./constants";
+import axios from "axios";
 
 
 const WriteMore = ({setShowWriteMoreModal}) => {
 
-  const handleSubmit = () => {
-    Toastr.success("SUBMITTTED")
+  const [queryData,setQueryData] = useState(INITIAL_VALUES)
+  const URL = "https://webhook.site/9f54337a-cb5f-43e8-bb10-6caa824fb55a"
+
+  const handleSubmit = (values) => {
+    axios.post(URL,values)
+    setShowWriteMoreModal(false).then(data=>console.log(data))
   }
+
 
   return (
    <>
@@ -32,15 +38,17 @@ const WriteMore = ({setShowWriteMoreModal}) => {
                 <Input
                   label="Name"
                   name="name"
-                  placeholder="Enter Name"
+                  placeholder="Oliver Smith"
                 />
                 <Input label="Email" name="email" placeholder="Enter Email" />
               </div>
               <Textarea
-                  label="Message"
-                  placeholder="Enter Message"
-/>
-              <div className="nui-pane__footer nui-pane__footer--absolute"></div>
+            label="Message"
+            name="message"
+            rows={3}
+            placeholder="Write your meassage here"
+          />
+              {/* <div className="nui-pane__footer nui-pane__footer--absolute"></div> */}
             </div>
           </Modal.Body>
           <Modal.Footer className="flex space-x-4">

@@ -12,7 +12,8 @@ const Landing = () => {
   const [showSearchModal, setShowSearchModal] = useState(false)
   const [showFilterPane,setShowFilterPane]  = useState(false)
   useEffect(()=>{
-    localStorage.setItem('filteredCategories', JSON.stringify([]))
+    localStorage.setItem('filteredCategories', JSON.stringify(['2','3','4','5']))
+    localStorage.setItem('isArchived', false)
   },[])
 
   return (
