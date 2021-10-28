@@ -3,6 +3,7 @@ import { Typography,Button } from "@bigbinary/neetoui/v2";
 import { useLocation } from "react-router";
 import BulletCard from "./BulletCard";
 import { Copy } from "@bigbinary/neeto-icons";
+import { Link } from "react-router-dom";
 
 const Article = () => {
   const {result,index} = useLocation().state
@@ -24,7 +25,7 @@ const Article = () => {
         </div>
         <Typography>{Array(5).fill().map((_,i)=>(result[index].content))}</Typography>
         </div>
-        <BulletCard category={result[index].category} result={result} MainArticleId={index}/>
+        <BulletCard category={result[index].category} result={result} MainArticleId={index} filte={false}/>
     </div>
   );
 };
