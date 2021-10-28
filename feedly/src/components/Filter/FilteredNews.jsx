@@ -11,18 +11,31 @@ import BulletCard from "../Landing/BulletCard";
 
 const FilteredNews = () => {
   const [filteredNews, setFilteredNews] = useState([]);
-  const [fetchData,setFetchData] = useState([])
+  const [fetchData, setFetchData] = useState([]);
   const [showWriteMoreModal, setShowWriteMoreModal] = useState(false);
   const [dateArticle, setDateArticle] = useState(new Date());
-  const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+  const MONTHS = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
-  const getDate = () =>{
-    var day = dateArticle.getDate()
-    var month = dateArticle.getMonth()
-    var year = dateArticle.getFullYear()
-    var dateToday = `${day} ${MONTHS[month]} ${year}`
-    return(dateToday)
-  }
+  const getDate = () => {
+    var day = dateArticle.getDate();
+    var month = dateArticle.getMonth();
+    var year = dateArticle.getFullYear();
+    var dateToday = `${day} ${MONTHS[month]} ${year}`;
+    return dateToday;
+  };
 
   const categories = [
     "all",
@@ -35,49 +48,30 @@ const FilteredNews = () => {
   ];
   const { filteredCategories, isArchived } = useLocation().state;
 
-
-  useEffect(()=>{
+  useEffect(() => {
     const fetchNews = async (category) => {
-      const data = await axios.get(`https://inshortsapi.vercel.app/news?category=${category}`)
-      setFetchData( fetchData  => [...fetchData, data.data])
-    }
-    setFilteredNews([])
-    categories.forEach((category)=>fetchNews(category))
-  },[])
+      const data = await axios.get(
+        `https://inshortsapi.vercel.app/news?category=${category}`
+      );
+      setFetchData((fetchData) => [...fetchData, data.data]);
+    };
+    setFilteredNews([]);
+    categories.forEach((category) => fetchNews(category));
+  }, []);
 
-
-//   useEffect(()=>{
-//    console.log(fetchData)
-//    let array = []
-//     filteredCategories.map(category=>{
-//       var news = fetchData.filter((element)=>{return categories[category]==element.category})
-//      array.push(...news)
-//     console.log(news)
-
-// })
-//   setFilteredNews([...array])
-//   console.log(filteredNews)
-
-//   },[filteredCategories])
-
-
-  const archived = () => {
-
-  // if (!isArchived){
-    // console.log(`arr-${array}`)
-            // let filter = filteredNews.map((news1) =>{
-                  // console.log(`news1-${JSON.stringify(news1)}`)
-                  // var newsAll = news1.data.filter((news2)=>{return news2.date.split(",")[0]===getDate()})
-                  // news1.data = [...newsAll]
-                  // console.log(`newsAll- ${newsAll}`)
-                  // return news1
-            //  })
-            //  console.log(JSON.stringify(filter))
-            //  console.log(`filterd-${filteredNews}`)
-            //  setFilteredNews([])
-            //  setFilteredNews([...filter])
-          // }
-  }
+  useEffect(() => {
+    console.log(fetchData);
+    let array = [];
+    filteredCategories.map((category) => {
+      var news = fetchData.filter((element) => {
+        return categories[category] == element.category;
+      });
+      array.push(...news);
+      console.log(news);
+    });
+    setFilteredNews([...array]);
+    console.log(filteredNews);
+  }, [filteredCategories]);
 
   //   useEffect(()=>{
   //     const fetchNews = async (category) => {
@@ -86,7 +80,6 @@ const FilteredNews = () => {
   //   }
   //   setFilteredNews([])
   //   filteredCategories.forEach((category)=>fetchNews(category))
-
 
   //   if (!isArchived && filteredNews.length>0){
 
@@ -105,44 +98,15 @@ const FilteredNews = () => {
 
   // },[filteredCategories])
 
-
-
   const handleClose = (e) => {
     //To implement
   };
 
-  // if (filteredNews.length == 0)
-  //   return (
-  //     <>
-  //       <div className="flex justify-center py-16">
-  //         <div className="space-y-5 flex flex-col justify-center">
-  //           <img src={NoNews} alt="No News" className="" />
-  //           <Typography style="h3">No News Articles Found</Typography>
-  //           <Button
-  //             className="mx-auto"
-  //             icon={() => <Highlight size={15} />}
-  //             label="Write to us"
-  //             style="secondary"
-  //             onClick={() => setShowWriteMoreModal(true)}
-  //           />
-  //         </div>
-  //       </div>
-
-  //       {showWriteMoreModal && (
-  //         <WriteMore setShowWriteMoreModal={setShowWriteMoreModal} />
-
-  //       )}
-  //     </>
-  //   );
-
-
-
-  return (
-
-    filteredNews.length==0?
-      (<>
+  return filteredNews.length == 0 ? (
+    <>
       {console.log("filtered news")}
-      <div className="flex justify-center py-16">{console.log("rendering from componentw")}
+      <div className="flex justify-center py-16">
+        {console.log("rendering from componentw")}
         <div className="space-y-5 flex flex-col justify-center">
           <img src={NoNews} alt="No News" className="" />
           <Typography style="h3">No News Articles Found</Typography>
@@ -154,17 +118,22 @@ const FilteredNews = () => {
             onClick={() => setShowWriteMoreModal(true)}
           />
         </div>
-
       </div>
-      <BulletCard category='all' result={fetchData[0].data} MainArticleId={0} filter={true}/>
+      <BulletCard
+        category="all"
+        result={fetchData[0].data}
+        MainArticleId={0}
+        filter={true}
+      />
 
       {showWriteMoreModal && (
         <>
-        <WriteMore setShowWriteMoreModal={setShowWriteMoreModal} />
+          <WriteMore setShowWriteMoreModal={setShowWriteMoreModal} />
         </>
       )}
-      </>)
-    : (<div>
+    </>
+  ) : (
+    <div>
       <div>
         {filteredCategories.map((category, i) => (
           <Tag
@@ -176,65 +145,26 @@ const FilteredNews = () => {
             onClose={(e) => handleClose(e)}
           />
         ))}
-        {isArchived?
-        <Tag
+        {isArchived ? (
+          <Tag
             className="mr-5 mt-5"
             label="Archived"
             onClose={(e) => handleClose(e)}
-          />:null}
-      </div>
-      {/* {console.log(filteredNews)} */}
-
-      {filteredNews.length >0 &&
-      // console.log(filteredNews)
-      filteredNews.map((news, i) => (
-        <div>
-          <NewsCard
-            result={news.data}
-            category={news.category[0].toUpperCase() + news.category.slice(1)}
-            // category="national"
-            filter={true}
           />
-        </div>
-      ))
-    }
-    </div>)
+        ) : null}
+      </div>
 
-    // <div>
-    //   <div>
-    //     {filteredCategories.map((category, i) => (
-    //       <Tag
-    //         className="mr-5 mt-5"
-    //         label={
-    //           categories[category][0].toUpperCase() +
-    //           categories[category].slice(1)
-    //         }
-    //         onClose={(e) => handleClose(e)}
-    //       />
-    //     ))}
-    //     {isArchived?
-    //     <Tag
-    //         className="mr-5 mt-5"
-    //         label="Archived"
-    //         onClose={(e) => handleClose(e)}
-    //       />:null}
-    //   </div>
-    //   {/* {console.log(filteredNews)} */}
-
-    //   {filteredNews.length >0 &&
-    //   console.log(filteredNews)
-    //   // filteredNews.map((news, i) => (
-    //   //   <div>
-    //   //     <NewsCard
-    //   //       result={news.data}
-    //   //       category={news.category[0].toUpperCase() + news.category.slice(1)}
-    //   //       // category="national"
-    //   //       filter={true}
-    //   //     />
-    //   //   </div>
-    //   // ))
-    // }
-    // </div>
+      {filteredNews.length > 0 &&
+        filteredNews.map((news, i) => (
+          <div>
+            <NewsCard
+              result={news.data}
+              category={news.category[0].toUpperCase() + news.category.slice(1)}
+              filter={true}
+            />
+          </div>
+        ))}
+    </div>
   );
 };
 
