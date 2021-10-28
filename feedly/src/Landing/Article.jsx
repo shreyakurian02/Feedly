@@ -25,7 +25,7 @@ const Article = () => {
         </div>
         <Typography>{Array(5).fill().map((_,i)=>(result[index].content))}</Typography>
         </div>
-        <BulletCard category={result[index].category} result={result} MainArticleId={index}/>
+        <BulletCard category={result[index].category} result={result} MainArticleId={index} filte={false}/>
     </div>
   );
 };

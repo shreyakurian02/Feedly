@@ -12,7 +12,7 @@ const FilteredNews = () => {
   const [filteredNews, setFilteredNews] = useState([]);
   const [showWriteMoreModal, setShowWriteMoreModal] = useState(false);
   const [date, setDate] = useState(new Date());
-  const [id, setId] = useState();
+
   const categories = [
     "all",
     "science",
@@ -22,7 +22,6 @@ const FilteredNews = () => {
     "world",
     "technology",
   ];
-  // const [filteredCategories,setFilteredCategories] = useState(JSON.parse(localStorage.getItem('filteredCategories')))
   const { filteredCategories } = useLocation().state;
     useEffect(()=>{
       const fetchNews = async (category) => {
@@ -80,6 +79,7 @@ const FilteredNews = () => {
           <NewsCard
             result={news.data}
             category={news.category[0].toUpperCase() + news.category.slice(1)}
+            filter={true}
           />
         </div>
       ))}

@@ -3,7 +3,7 @@ import { Typography,Button} from "@bigbinary/neetoui/v2";
 import BulletCard from "../BulletCard";
 import { Link } from "react-router-dom";
 
-const NewsCard = ({ result, category}) => {
+const NewsCard = ({ result, category,filter}) => {
   return (
     <>
       <div className="border-b pt-3 pb-12">
@@ -42,7 +42,7 @@ const NewsCard = ({ result, category}) => {
           </div>
         </div>
       </div>
-      <BulletCard result={result} category={category} MainArticleId={0}/>
+      <BulletCard result={result} category={category} MainArticleId={0} filter={filter}/>
     </>
   );
 };

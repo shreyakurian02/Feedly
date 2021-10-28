@@ -39,10 +39,10 @@ const NewsList = () => {
   return (
   <>
 
-  <NewsCard result={national} category="National"/>
-  <NewsCard result={sports} category="Sports"/>
-  <NewsCard result={world} category="World"/>
-  <NewsCard result={business} category="Business"/>
+  <NewsCard result={national} category="National" filter={false}/>
+  <NewsCard result={sports} category="Sports" filter={false}/>
+  <NewsCard result={world} category="World" filter={false}/>
+  <NewsCard result={business} category="Business" filter={false}/>
   </>
   );
 }
