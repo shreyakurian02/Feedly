@@ -23,7 +23,6 @@ const WriteMore = ({setShowWriteMoreModal}) => {
    <>
        <Modal isOpen={setShowWriteMoreModal} onClose={() => setShowWriteMoreModal(false)} size="md">
         <Modal.Header>
-        {console.log("write more")}
           <Typography style="h2">Can’t find what you came for?</Typography>
           <Typography style="body2">Write to us about which category interests you and we will fetch them for you daily, for free.</Typography>
         </Modal.Header>
