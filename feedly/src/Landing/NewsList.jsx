@@ -38,7 +38,6 @@ const NewsList = () => {
 
   return (
   <>
-
   <NewsCard result={national} category="National" filter={false}/>
   <NewsCard result={sports} category="Sports" filter={false}/>
   <NewsCard result={world} category="World" filter={false}/>

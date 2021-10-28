@@ -15,6 +15,7 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
     "Technology",
   ];
 
+
   const [filteredCategories, setFilteredCategories] = useState([]);
   const [isArchived,setIsArchived] = useState(false)
 
@@ -22,8 +23,11 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
     setFilteredCategories(
       JSON.parse(window.localStorage.getItem("filteredCategories"))
     );
-    setIsArchived(window.localStorage.getItem("isArchived"))
+    setIsArchived(JSON.parse(window.localStorage.getItem("isArchived")))
   }, []);
+
+
+
 
   useEffect(() => {
     window.localStorage.setItem(
@@ -32,12 +36,14 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
     );
   }, [filteredCategories]);
 
+
+
+
   useEffect(() => {
     window.localStorage.setItem(
       "isArchived",
       isArchived
     );
-    console.log(`archived:${isArchived}`)
   }, [isArchived]);
 
   const handleFilter = (e) => {
@@ -53,8 +59,6 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
 
   const handleArchived = (e) => {
     let id = e.target.id;
-    console.log(`archived:${isArchived}`)
-    console.log(`checked:${id}`)
     if (e.target.checked) {
         setIsArchived(true);
     } else {

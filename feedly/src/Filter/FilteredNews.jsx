@@ -11,7 +11,17 @@ import WriteMore from "./WriteMore";
 const FilteredNews = () => {
   const [filteredNews, setFilteredNews] = useState([]);
   const [showWriteMoreModal, setShowWriteMoreModal] = useState(false);
-  const [date, setDate] = useState(new Date());
+  const [dateArticle, setDateArticle] = useState(new Date());
+  const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+
+  const getDate = () =>{
+    var day = dateArticle.getDate()
+    var month = dateArticle.getMonth()
+    var year = dateArticle.getFullYear()
+    var dateToday = `${day} ${MONTHS[month]} ${year}`
+    console.log(dateToday)
+    return(dateToday)
+  }
 
   const categories = [
     "all",
@@ -23,18 +33,27 @@ const FilteredNews = () => {
     "technology",
   ];
   const { filteredCategories, isArchived } = useLocation().state;
-  //   useEffect(()=>{
-  //     const fetchNews = async (category) => {
-  //     const data = await axios.get(`https://inshortsapi.vercel.app/news?category=${categories[category]}`)
-  //     if(!filteredNews.includes(data.data)) setFilteredNews( filteredNews => [...filteredNews, data.data])
-  //   }
-  //   setFilteredNews([])
-  //   filteredCategories.forEach((category)=>fetchNews(category))
-  //   if (!filteredCategories.includes(String(8))){
-  //     console.log(filteredNews)
-  //   }
+    useEffect(()=>{
+      const fetchNews = async (category) => {
+      const data = await axios.get(`https://inshortsapi.vercel.app/news?category=${categories[category]}`)
+      if(!filteredNews.includes(data.data)) setFilteredNews( filteredNews => [...filteredNews, data.data])
+    }
+    setFilteredNews([])
+    filteredCategories.forEach((category)=>fetchNews(category))
+    if (!isArchived){
 
-  // },[filteredCategories])
+      var filter = filteredNews.map((news) =>{
+            var newsAll = news.data.filter((news)=>{return news.date.split(",")[0]===getDate()})
+            news.data = [...newsAll]
+            console.log(`newsAll- ${newsAll}`)
+            return news
+       })
+       console.log(filter)
+       setFilteredNews(filter)
+
+    }
+
+  },[filteredCategories])
 
 
 
@@ -46,7 +65,6 @@ const FilteredNews = () => {
     return (
       <>
         <div className="flex justify-center py-16">
-
           <div className="space-y-5 flex flex-col justify-center">
             <img src={NoNews} alt="No News" className="" />
             <Typography style="h3">No News Articles Found</Typography>
@@ -62,6 +80,7 @@ const FilteredNews = () => {
 
         {showWriteMoreModal && (
           <WriteMore setShowWriteMoreModal={setShowWriteMoreModal} />
+
         )}
       </>
     );
@@ -86,7 +105,7 @@ const FilteredNews = () => {
             onClose={(e) => handleClose(e)}
           />:null}
       </div>
-      {console.log(filteredNews)}
+      {/* {console.log(filteredNews)} */}
       {filteredNews.map((news, i) => (
         <div>
           <NewsCard

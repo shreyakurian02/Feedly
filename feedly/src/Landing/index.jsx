@@ -13,7 +13,7 @@ const Landing = () => {
   const [showFilterPane,setShowFilterPane]  = useState(false)
   useEffect(()=>{
     localStorage.setItem('filteredCategories', JSON.stringify(['2','3','4','5']))
-    localStorage.setItem('isArchived', false)
+    localStorage.setItem('isArchived', 0)
   },[])
 
   return (
