@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../App.css";
+// import "../App.css";
 import { Modal } from "@bigbinary/neetoui/v2";
 import { Formik, Form } from "formik";
 import { Button, Pane, Typography, Toastr } from "@bigbinary/neetoui/v2";
@@ -15,7 +15,7 @@ const WriteMore = ({setShowWriteMoreModal}) => {
 
   const handleSubmit = (values) => {
     axios.post(URL,values)
-    setShowWriteMoreModal(false).then(data=>console.log(data))
+    setShowWriteMoreModal(false)
   }
 
 
@@ -23,6 +23,7 @@ const WriteMore = ({setShowWriteMoreModal}) => {
    <>
        <Modal isOpen={setShowWriteMoreModal} onClose={() => setShowWriteMoreModal(false)} size="md">
         <Modal.Header>
+        {console.log("write more")}
           <Typography style="h2">Can’t find what you came for?</Typography>
           <Typography style="body2">Write to us about which category interests you and we will fetch them for you daily, for free.</Typography>
         </Modal.Header>

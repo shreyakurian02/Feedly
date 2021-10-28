@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import "../App.css";
+// import "../App.css";
 import { Header } from "@bigbinary/neetoui/v2/layouts";
 import { Button, Tooltip } from "@bigbinary/neetoui/v2";
 import { Search, Notification, Filter } from "@bigbinary/neeto-icons";
@@ -12,8 +12,8 @@ const Landing = () => {
   const [showSearchModal, setShowSearchModal] = useState(false)
   const [showFilterPane,setShowFilterPane]  = useState(false)
   useEffect(()=>{
-    localStorage.setItem('filteredCategories', JSON.stringify(['2','3','4','5']))
-    localStorage.setItem('isArchived', 0)
+    localStorage.setItem('filteredCategories', JSON.stringify([]))
+    localStorage.setItem('isArchived', false)
   },[])
 
   return (

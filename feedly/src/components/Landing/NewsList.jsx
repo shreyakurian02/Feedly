@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import '../App.css';
+// import '../App.css';
 import axios from 'axios';
 import NewsCard from './NewsCard';
 import { Typography,PageLoader } from "@bigbinary/neetoui/v2";

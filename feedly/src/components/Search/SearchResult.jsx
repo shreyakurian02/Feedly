@@ -9,6 +9,7 @@ const SearchResult = ({ searchResult }) => {
 
   const result = searchResult.map((news) => (
    <div>
+     {console.log("rendering from comp result")}
      <Button
     style="text"
     className="py-5"

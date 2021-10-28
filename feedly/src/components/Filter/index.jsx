@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../App.css";
+// import "../App.css";
 import { Pane, Typography, Button, Checkbox } from "@bigbinary/neetoui/v2";
 import { Check } from "@bigbinary/neeto-icons";
 import { Link } from "react-router-dom";
@@ -69,6 +69,7 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
   return (
     <div>
       <Pane isOpen={setShowFilterPane} onClose={onClose}>
+      {console.log("filtered pane")}
         <Pane.Header>
           <Typography style="h2" weight="semibold">
             Filter Articles

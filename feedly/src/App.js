@@ -1,9 +1,10 @@
 import React from "react";
 import { Route, Redirect, Switch,  BrowserRouter } from "react-router-dom";
-import FilteredNews from "./Filter/FilteredNews";
-import Landing from "./Landing";
-import Article from "./Landing/Article";
-import NewsList from "./Landing/NewsList";
+import FilteredNews from "./components/Filter/FilteredNews";
+// import Landing from "./Landing";
+import Article from "./components/Landing/Article";
+import NewsList from "./components/Landing/NewsList";
+import Landing from "./components/Landing"
 
 
 const App = () => {
