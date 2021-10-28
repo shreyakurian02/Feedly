@@ -60,17 +60,14 @@ const FilteredNews = () => {
   }, []);
 
   useEffect(() => {
-    console.log(fetchData);
     let array = [];
     filteredCategories.map((category) => {
       var news = fetchData.filter((element) => {
         return categories[category] == element.category;
       });
       array.push(...news);
-      console.log(news);
     });
     setFilteredNews([...array]);
-    console.log(filteredNews);
   }, [filteredCategories]);
 
   //   useEffect(()=>{
@@ -105,7 +102,6 @@ const FilteredNews = () => {
   return filteredNews.length == 0 ? (
     <>
       <div className="flex justify-center py-16">
-        {/* {console.log("rendering from componentw")} */}
         <div className="space-y-5 flex flex-col justify-center">
           <img src={NoNews} alt="No News" className="" />
           <Typography style="h3">No News Articles Found</Typography>

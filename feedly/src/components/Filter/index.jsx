@@ -69,7 +69,6 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
   return (
     <div>
       <Pane isOpen={setShowFilterPane} onClose={onClose}>
-      {console.log("filtered pane")}
         <Pane.Header>
           <Typography style="h2" weight="semibold">
             Filter Articles

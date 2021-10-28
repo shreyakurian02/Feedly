@@ -9,7 +9,6 @@ const SearchModal = ({ onClose, setShowSearchModal }) => {
   if(!setShowSearchModal) return null
   return ReactDOM.createPortal(
     <>
-    {console.log("rendering from comp nsearch")}
     <div className="fixed inset-0 bg-black bg-opacity-70"/>
     <div className="fixed top-1/2 w-1/2 border bg-white left-1/4">
         <Input
