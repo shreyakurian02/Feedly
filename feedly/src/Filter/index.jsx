@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
 import { Pane, Typography, Button, Checkbox } from "@bigbinary/neetoui/v2";
 import { Check } from "@bigbinary/neeto-icons";
@@ -17,21 +17,32 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
 
   const [filteredCategories, setFilteredCategories] = useState([]);
 
+  useEffect(() => {
+    setFilteredCategories(
+      JSON.parse(window.localStorage.getItem("filteredCategories"))
+    );
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      "filteredCategories",
+      JSON.stringify(filteredCategories)
+    );
+  }, [filteredCategories]);
+
   const handleFilter = (e) => {
     let id = e.target.id;
-    if (e.target.checked)
-    {
-      setFilteredCategories([...filteredCategories, e.target.id]);
-      e.target.checked=true
-    }
-    else {
+    if (e.target.checked) {
+      if (!filteredCategories.includes(String(id)))
+        setFilteredCategories([...filteredCategories, e.target.id]);
+    } else {
       var filtered = filteredCategories.filter((id) => id !== e.target.id);
       setFilteredCategories(filtered);
     }
   };
+
   return (
     <div>
-      {console.log("rendering filter pane")}
       <Pane isOpen={setShowFilterPane} onClose={onClose}>
         <Pane.Header>
           <Typography style="h2" weight="semibold">
@@ -45,7 +56,9 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
               <div className="pl-4 py-5">
                 <Checkbox
                   id={i}
-                  // checked={filteredCategories.includes(i)?false:true}
+                  checked={
+                    filteredCategories.includes(String(i)) ? true : false
+                  }
                   label={
                     <Typography style="h5" className="neeto-ui-text-black">
                       {category}
@@ -79,7 +92,12 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
               state: { filteredCategories: filteredCategories },
             }}
           >
-            <Button icon={Check} size="large" label="Save Changes" onClick={() => setShowFilterPane(false) }/>
+            <Button
+              icon={Check}
+              size="large"
+              label="Save Changes"
+              onClick={() => setShowFilterPane(false)}
+            />
           </Link>
           <Button
             style="text"
@@ -88,7 +106,6 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
             onClick={() => setShowFilterPane(false)}
           />
         </Pane.Footer>
-        {/* {console.log(filteredCategories)} */}
       </Pane>
     </div>
   );

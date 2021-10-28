@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "../App.css";
 import { Header } from "@bigbinary/neetoui/v2/layouts";
 import { Button, Tooltip } from "@bigbinary/neetoui/v2";
@@ -11,6 +11,10 @@ import FilterPane from "../Filter";
 const Landing = () => {
   const [showSearchModal, setShowSearchModal] = useState(false)
   const [showFilterPane,setShowFilterPane]  = useState(false)
+  useEffect(()=>{
+    localStorage.setItem('filteredCategories', JSON.stringify([]))
+  },[])
+
   return (
     <div>
       <div className="px-6 border-b">

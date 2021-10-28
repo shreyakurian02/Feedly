@@ -21,7 +21,6 @@ const Card = ({ result, index }) => {
        <Button
           label="Read More"
           style="link"
-          
           className="neeto-ui-text-secondary-indigo"
         />
         </Link>
