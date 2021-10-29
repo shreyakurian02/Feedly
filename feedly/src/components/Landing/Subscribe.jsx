@@ -4,7 +4,7 @@ import { Modal } from "@bigbinary/neetoui/v2";
 import { Formik, Form } from "formik";
 import { Button, Pane, Typography, Toastr } from "@bigbinary/neetoui/v2";
 import { Input, Select,Textarea } from "@bigbinary/neetoui/v2/formik";
-// import { INITIAL_VALUES,VALIDATION_SCHEMA } from "./constants";
+import { SUBSCRIPPTION_INITIAL_VALUES,VALIDATION_SCHEMA } from "./constants";
 import axios from "axios";
 import subscribe from './subscribe.png'
 
@@ -27,6 +27,9 @@ const Subscribe = ({setShowSubsribeModal}) => {
         <Typography style="h2" className="py-2">Subscribe to Feed.ly</Typography>
         </Modal.Header>
         <Formik
+        initialValues={SUBSCRIPPTION_INITIAL_VALUES}
+        onSubmit={handleSubmit}
+        validationSchema={VALIDATION_SCHEMA}
       >
         <Form className="w-full">
           <Modal.Body>
