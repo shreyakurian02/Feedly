@@ -1,33 +1,21 @@
 import React, { useState, useEffect } from "react";
-// import "../App.css";
 import { useLocation } from "react-router";
-import { Pane, Typography, Button, Checkbox, Tag } from "@bigbinary/neetoui/v2";
+import { Typography, Button,Tag } from "@bigbinary/neetoui/v2";
 import { Highlight } from "@bigbinary/neeto-icons";
-import axios from "axios";
 import NewsCard from "../Landing/NewsCard";
 import NoNews from "./NoNews.png";
 import WriteMore from "./WriteMore";
 import BulletCard from "../Landing/BulletCard";
+import { NewsContext } from '../../contexts/newsFeeder';
+import { useContext } from "react";
+import { MONTHS } from "./constants";
 
 const FilteredNews = () => {
   const [filteredNews, setFilteredNews] = useState([]);
   const [fetchData, setFetchData] = useState([]);
   const [showWriteMoreModal, setShowWriteMoreModal] = useState(false);
   const [dateArticle, setDateArticle] = useState(new Date());
-  const MONTHS = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
+  const categoriesData = useContext(NewsContext)
 
   const getDate = () => {
     var day = dateArticle.getDate();
@@ -49,14 +37,10 @@ const FilteredNews = () => {
   const { filteredCategories, isArchived } = useLocation().state;
 
   useEffect(() => {
-    const fetchNews = async (category) => {
-      const data = await axios.get(
-        `https://inshortsapi.vercel.app/news?category=${category}`
-      );
-      setFetchData((fetchData) => [...fetchData, data.data]);
-    };
-    setFilteredNews([]);
-    categories.forEach((category) => fetchNews(category));
+    categoriesData.forEach(category => {
+      setFetchData(fetchData=>[...fetchData,category])
+    })
+
   }, []);
 
   useEffect(() => {
