@@ -1,20 +1,16 @@
 
 import React, {
-  useCallback,
-  useMemo,
   useEffect,
   useState,
   useContext,
 } from "react";
 import ReactDOM from "react-dom";
 import { Input, Button } from "@bigbinary/neetoui/v2";
-import { Search, Down, Close } from "@bigbinary/neeto-icons";
+import { Search, Close } from "@bigbinary/neeto-icons";
 import useDebounce from "../../common/hooks/useDebounce";
 import { NewsContext } from "../../contexts/newsFeeder";
 import SearchResult from "./SearchResult";
-import { Scrollable } from "@bigbinary/neetoui/layouts";
-import { NewsFeeder } from "../../contexts/newsFeeder";
-import { array } from "yup/lib/locale";
+
 
 const SearchModal = ({ onClose, setShowSearchModal }) => {
   const [searchWord, setSearchWord] = useState("");
@@ -22,38 +18,32 @@ const SearchModal = ({ onClose, setShowSearchModal }) => {
   const debouncedSearch = useDebounce(searchWord, 1000);
   const [searchResult, setSearchResult] = useState([]);
   const news = useContext(NewsContext);
-  const [dummy,setDummy] = useState([])
-  // const [index,setindex] = useState([])
+  const [searchRelatedData,setSearchRelatedData] = useState([])
 
   useEffect(async () => {
     setLoading(true);
-    let array = []
-    let searcharray = []
-    setSearchResult([]);
-    setDummy([])
-    news.forEach((categoryData) => {
-      var presentData = categoryData.data.filter((e) => {
-        if(e.title.toLowerCase().includes(debouncedSearch.toLowerCase()))
-              array.push(categoryData.data)
-        return e.title.toLowerCase().includes(debouncedSearch.toLowerCase());
-        // categoryData.data
-      });
-      searcharray.push(presentData)
-      // setSearchResult((pr) => [...pr, ...presentData]);
+    var searchRelatedArray = []
+    var searchResultArray = []
 
-      // return  categoryData.data
-      // setDummy(data=>[...data,categoryData.data])
+    setSearchResult([]);
+    setSearchRelatedData([])
+    news.forEach((categoryData) => {
+      var presentData = categoryData.data.filter((e) =>{
+        if(e.title.toLowerCase().includes(debouncedSearch.toLowerCase()))
+        searchRelatedArray.push(categoryData.data)
+        return e.title.toLowerCase().includes(debouncedSearch.toLowerCase());
+      });
+      searchResultArray.push(presentData)
     });
 
 
-    searcharray=searcharray.flat()
-    console.log(`sa-${searcharray.length}`)
-    console.log(array.length)
-     setDummy(array)
-     setSearchResult(searcharray)
+    searchResultArray=searchResultArray.flat()
+    setSearchRelatedData(searchRelatedArray)
+     setSearchResult(searchResultArray)
+
     if (searchWord == "") {
       setSearchResult([])
-      setDummy([])};
+      setSearchRelatedData([])};
     setLoading(false);
   }, [debouncedSearch]);
 
@@ -81,7 +71,7 @@ const SearchModal = ({ onClose, setShowSearchModal }) => {
             onChange={(event) => setSearchWord(event.target.value)}
           />
           {searchResult.length > 0 && (
-            <SearchResult searchResult={searchResult} dummy={dummy} setShowSearchModal={setShowSearchModal}/>
+            <SearchResult searchResult={searchResult} dummy={searchRelatedData} setShowSearchModal={setShowSearchModal}/>
           )}
         </div>
         </div>

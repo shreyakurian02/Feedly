@@ -3,7 +3,6 @@ import { Typography,Button } from "@bigbinary/neetoui/v2";
 import { useLocation } from "react-router";
 import BulletCard from "./BulletCard";
 import { Copy } from "@bigbinary/neeto-icons";
-import { Link } from "react-router-dom";
 import { PageLoader } from "@bigbinary/neetoui/v2";
 
 const Article = () => {
@@ -23,8 +22,6 @@ const Article = () => {
   )
   return (
     <div className="py-8 space-y-4 ">
-      {/* {console.log(result)}
-      {console.log(index)} */}
       <div className="border-b py-8 space-y-6">
         <Typography style="h1" >
          {result[index].title}

@@ -1,33 +1,19 @@
 import React, { useEffect, useState } from "react";
-// import "../App.css";
 import { Pane, Typography, Button, Checkbox } from "@bigbinary/neetoui/v2";
 import { Check } from "@bigbinary/neeto-icons";
 import { Link } from "react-router-dom";
+import { CATEGORIES } from "../../contexts/constants";
 
 const FilterPane = ({ onClose, setShowFilterPane }) => {
-  const categories = [
-    "All",
-    "Science",
-    "Business",
-    "National",
-    "Sports",
-    "World",
-    "Technology",
-  ];
-
-
   const [filteredCategories, setFilteredCategories] = useState([]);
-  const [isArchived,setIsArchived] = useState(false)
+  const [isArchived, setIsArchived] = useState(false);
 
   useEffect(() => {
     setFilteredCategories(
       JSON.parse(window.localStorage.getItem("filteredCategories"))
     );
-    setIsArchived(JSON.parse(window.localStorage.getItem("isArchived")))
+    setIsArchived(JSON.parse(window.localStorage.getItem("isArchived")));
   }, []);
-
-
-
 
   useEffect(() => {
     window.localStorage.setItem(
@@ -36,14 +22,8 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
     );
   }, [filteredCategories]);
 
-
-
-
   useEffect(() => {
-    window.localStorage.setItem(
-      "isArchived",
-      isArchived
-    );
+    window.localStorage.setItem("isArchived", isArchived);
   }, [isArchived]);
 
   const handleFilter = (e) => {
@@ -60,7 +40,7 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
   const handleArchived = (e) => {
     let id = e.target.id;
     if (e.target.checked) {
-        setIsArchived(true);
+      setIsArchived(true);
     } else {
       setIsArchived(false);
     }
@@ -77,7 +57,7 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
         <Pane.Body>
           <Typography style="h4">Category</Typography>
           <div>
-            {categories.map((category, i) => (
+            {CATEGORIES.map((category, i) => (
               <div className="pl-4 py-5">
                 <Checkbox
                   id={i}
@@ -105,7 +85,7 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
                   Include archived articles
                 </Typography>
               }
-              onChange={(e)=>handleArchived(e)}
+              onChange={(e) => handleArchived(e)}
             />
           </div>
         </Pane.Body>
@@ -113,7 +93,10 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
           <Link
             to={{
               pathname: "/filtered",
-              state: { filteredCategories: filteredCategories, isArchived:isArchived },
+              state: {
+                filteredCategories: filteredCategories,
+                isArchived: isArchived,
+              },
             }}
           >
             <Button

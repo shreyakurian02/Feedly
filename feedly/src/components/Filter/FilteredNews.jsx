@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import { useLocation } from "react-router";
-import { Typography, Button,Tag } from "@bigbinary/neetoui/v2";
+import { Typography, Button, Tag } from "@bigbinary/neetoui/v2";
 import { Highlight } from "@bigbinary/neeto-icons";
 import NewsCard from "../Landing/NewsCard";
 import NoNews from "./NoNews.png";
 import WriteMore from "./WriteMore";
 import BulletCard from "../Landing/BulletCard";
-import { NewsContext } from '../../contexts/newsFeeder';
-import { useContext } from "react";
+import { NewsContext } from "../../contexts/newsFeeder";
 import { MONTHS } from "./constants";
+import { CATEGORIES } from "../../contexts/constants";
 
 const FilteredNews = () => {
   const [filteredNews, setFilteredNews] = useState([]);
   const [fetchData, setFetchData] = useState([]);
   const [showWriteMoreModal, setShowWriteMoreModal] = useState(false);
   const [dateArticle, setDateArticle] = useState(new Date());
-  const categoriesData = useContext(NewsContext)
+  const categoriesData = useContext(NewsContext);
 
   const getDate = () => {
     var day = dateArticle.getDate();
@@ -25,35 +25,26 @@ const FilteredNews = () => {
     return dateToday;
   };
 
-  const categories = [
-    "all",
-    "science",
-    "business",
-    "national",
-    "sports",
-    "world",
-    "technology",
-  ];
   const { filteredCategories, isArchived } = useLocation().state;
 
   useEffect(() => {
-    categoriesData.forEach(category => {
-      setFetchData(fetchData=>[...fetchData,category])
-    })
-
+    categoriesData.forEach((category) => {
+      setFetchData((fetchData) => [...fetchData, category]);
+    });
   }, []);
 
   useEffect(() => {
     let array = [];
     filteredCategories.map((category) => {
       var news = fetchData.filter((element) => {
-        return categories[category] == element.category;
+        return CATEGORIES[category] == element.category;
       });
       array.push(...news);
     });
     setFilteredNews([...array]);
   }, [filteredCategories]);
 
+  //---------------------------------------------------TO WORK ON ---------------------------------------------------
   //   useEffect(()=>{
   //     const fetchNews = async (category) => {
   //     const data = await axios.get(`https://inshortsapi.vercel.app/news?category=${categories[category]}`)
@@ -78,6 +69,7 @@ const FilteredNews = () => {
   //   }
 
   // },[filteredCategories])
+  //---------------------------------------------------TO WORK ON ---------------------------------------------------
 
   const handleClose = (e) => {
     //To implement
@@ -93,18 +85,24 @@ const FilteredNews = () => {
             className="mx-auto"
             iconPosition="left"
             icon={() => <Highlight size={15} />}
-            label={<Typography style="h4" className="ml-3">Write to us</Typography>}
+            label={
+              <Typography style="h4" className="ml-3">
+                Write to us
+              </Typography>
+            }
             style="secondary"
             onClick={() => setShowWriteMoreModal(true)}
           />
         </div>
       </div>
-      {fetchData.length!=0 && <BulletCard
-        category="all"
-        result={fetchData[0].data}
-        MainArticleId={0}
-        filter={true}
-      /> }
+      {fetchData.length != 0 && (
+        <BulletCard
+          category="all"
+          result={fetchData[0].data}
+          MainArticleId={0}
+          filter={true}
+        />
+      )}
 
       {showWriteMoreModal && (
         <>
@@ -119,8 +117,8 @@ const FilteredNews = () => {
           <Tag
             className="mr-5 mt-5"
             label={
-              categories[category][0].toUpperCase() +
-              categories[category].slice(1)
+              CATEGORIES[category][0].toUpperCase() +
+              CATEGORIES[category].slice(1)
             }
             onClose={(e) => handleClose(e)}
           />

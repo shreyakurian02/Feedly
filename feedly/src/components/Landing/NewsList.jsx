@@ -1,9 +1,5 @@
-import React,{useEffect, useState,useContext} from 'react';
-// import '../App.css';
-import axios from 'axios';
+import React,{useContext} from 'react';
 import NewsCard from './NewsCard';
-import { PageLoader } from "@bigbinary/neetoui/v2";
-import { NewsFeeder } from '../../contexts/newsFeeder';
 import { NewsContext } from '../../contexts/newsFeeder';
 
 const NewsList = () => {
