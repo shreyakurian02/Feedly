@@ -37,7 +37,7 @@ const FilteredNews = () => {
     let array = [];
     filteredCategories.map((category) => {
       var news = fetchData.filter((element) => {
-        return CATEGORIES[category] == element.category;
+        return CATEGORIES[category] === element.category;
       });
       array.push(...news);
     });
@@ -75,7 +75,7 @@ const FilteredNews = () => {
     //To implement
   };
 
-  return filteredNews.length == 0 ? (
+  return filteredNews.length === 0 ? (
     <>
       <div className="flex justify-center py-16">
         <div className="space-y-5 flex flex-col justify-center">
@@ -98,7 +98,7 @@ const FilteredNews = () => {
       {fetchData.length != 0 && (
         <BulletCard
           category="all"
-          result={fetchData[0].data}
+          articleSet={fetchData[0].data}
           MainArticleId={0}
           filter={true}
         />
@@ -136,7 +136,7 @@ const FilteredNews = () => {
         filteredNews.map((news, i) => (
           <div>
             <NewsCard
-              result={news.data}
+              articleSet={news.data}
               category={news.category[0].toUpperCase() + news.category.slice(1)}
               filter={true}
             />

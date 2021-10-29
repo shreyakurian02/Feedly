@@ -3,23 +3,23 @@ import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { Link } from "react-router-dom";
 import { NewsContext } from "../../contexts/newsFeeder";
 
-const SearchResult = ({ searchResult, dummy, setShowSearchModal }) => {
+const SearchResult = ({ searchResult, searchRelatedData, setShowSearchModal }) => {
   const news = useContext(NewsContext);
 
   const result = searchResult.map((article, i) => {
-    let indexValue = dummy[i].indexOf(article);
+    let indexValue = searchRelatedData[i].indexOf(article);
 
     return (
-      <div className="relative z-20 mx-5 bg-white shadow-xl rounded-xl max-w-[700px] w-full transform transition-all duration-300 ease-in-out scale-100">
+      <div className="relative z-20bg-white shadow-xl  bg-gray-100 rounded-xl max-w-[700px] w-full transform transition-all py-3">
         <Link
           to={{
             pathname: `/news/${article.title}`,
-            state: { result: dummy[i], index: indexValue },
+            state: { articleSet: searchRelatedData[i], index: indexValue },
           }}
         >
           <Button
             style="text"
-            className="py-5 bg-gray-100 w-full px-2"
+            className="py-5 bg-gray-100 w-full"
             key={i}
             label={article.title}
             onClick={() => setShowSearchModal(false)}
