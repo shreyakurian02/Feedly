@@ -107,8 +107,9 @@ const FilteredNews = () => {
           <Typography style="h3">No News Articles Found</Typography>
           <Button
             className="mx-auto"
+            iconPosition="left"
             icon={() => <Highlight size={15} />}
-            label="Write to us"
+            label={<Typography style="h4" className="ml-3">Write to us</Typography>}
             style="secondary"
             onClick={() => setShowWriteMoreModal(true)}
           />
