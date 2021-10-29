@@ -7,10 +7,13 @@ import { Typography } from "@bigbinary/neetoui/v2";
 import NewsList from "./NewsList";
 import SearchModal from "../Search";
 import FilterPane from "../Filter";
+import Subscribe from "./Subscribe";
 
 const Landing = () => {
   const [showSearchModal, setShowSearchModal] = useState(false)
   const [showFilterPane,setShowFilterPane]  = useState(false)
+  const [showSubscribeModal,setShowSubsribeModal] = useState(false)
+
   useEffect(()=>{
     localStorage.setItem('filteredCategories', JSON.stringify([]))
     localStorage.setItem('isArchived', false)
@@ -35,6 +38,7 @@ const Landing = () => {
               }}/>
               <Button
                 style="text"
+                onClick={()=>setShowSubsribeModal(true)}
                 icon={() => <Notification />}
                 tooltipProps={{
                   content: "Notification",
@@ -65,6 +69,14 @@ const Landing = () => {
               }}
             />
           )}
+
+      {showSubscribeModal && (
+        <Subscribe
+        setShowSubsribeModal={setShowSubsribeModal}
+        onClose={()=> {
+          setShowSubsribeModal(false)
+        }}/>
+      )}
 
 {showFilterPane && (
             <FilterPane
