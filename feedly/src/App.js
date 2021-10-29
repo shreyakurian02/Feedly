@@ -5,11 +5,13 @@ import FilteredNews from "./components/Filter/FilteredNews";
 import Article from "./components/Landing/Article";
 import NewsList from "./components/Landing/NewsList";
 import Landing from "./components/Landing"
+import { NewsFeeder } from "./contexts/newsFeeder";
 
 
 const App = () => {
   return (
     <BrowserRouter>
+    <NewsFeeder>
     <div className="">
       <Landing />
       <div className="px-40">
@@ -21,6 +23,7 @@ const App = () => {
         </Switch>
       </div>
     </div>
+    </NewsFeeder>
     </BrowserRouter>
   );
 };

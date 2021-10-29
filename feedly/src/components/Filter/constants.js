@@ -11,4 +11,19 @@ const INITIAL_VALUES = {
   email: "",
   message: "",
 };
-export {VALIDATION_SCHEMA, INITIAL_VALUES };
+
+const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+export {VALIDATION_SCHEMA, INITIAL_VALUES, MONTHS };
