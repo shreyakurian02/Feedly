@@ -58,7 +58,7 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
           <Typography style="h4">Category</Typography>
           <div>
             {CATEGORIES.map((category, i) => (
-              <div className="pl-4 py-5">
+              <div className="pl-4 py-5" key={i}>
                 <Checkbox
                   id={i}
                   checked={
@@ -66,7 +66,7 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
                   }
                   label={
                     <Typography style="h5" className="neeto-ui-text-black">
-                      {category}
+                      {category[0].toUpperCase()+category.slice(1)}
                     </Typography>
                   }
                   onChange={(e) => {

@@ -41,7 +41,7 @@ const SearchModal = ({ onClose, setShowSearchModal }) => {
     setSearchRelatedData(searchRelatedArray)
      setSearchResult(searchResultArray)
 
-    if (searchWord == "") {
+    if (searchWord === "") {
       setSearchResult([])
       setSearchRelatedData([])};
     setLoading(false);
@@ -71,7 +71,7 @@ const SearchModal = ({ onClose, setShowSearchModal }) => {
             onChange={(event) => setSearchWord(event.target.value)}
           />
           {searchResult.length > 0 && (
-            <SearchResult searchResult={searchResult} dummy={searchRelatedData} setShowSearchModal={setShowSearchModal}/>
+            <SearchResult searchResult={searchResult} searchRelatedData={searchRelatedData} setShowSearchModal={setShowSearchModal}/>
           )}
         </div>
         </div>

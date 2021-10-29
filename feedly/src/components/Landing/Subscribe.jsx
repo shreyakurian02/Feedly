@@ -23,7 +23,7 @@ const Subscribe = ({ setShowSubsribeModal }) => {
         size="xs"
       >
         <Modal.Header>
-          <img src={subscribe} alt="" />
+          <img src={subscribe} alt="subscribe" />
           <Typography style="h2" className="py-2">
             Subscribe to Feed.ly
           </Typography>
