@@ -48,41 +48,6 @@ export const NewsFeeder = (props) => {
     fetchNews()
     },[])
 
-    // setLoading(false);
-    // console.log(allNews)
-
-
-      // const nationalData = await axios.get("https://inshortsapi.vercel.app/news?category=national");
-      // console.log(nationalData.data.data)
-
-      // const businessData = await axios.get("https://inshortsapi.vercel.app/news?category=business");
-      // console.log(nationalData.data.data)
-
-      // const sportsData = await axios.get("https://inshortsapi.vercel.app/news?category=sports");
-      // console.log(nationalData.data.data)
-
-      // const worldData= await axios.get("https://inshortsapi.vercel.app/news?category=world");
-      // console.log(nationalData.data.data)
-
-
-    //  if(allNews.length>0){
-    //   setNational(allNews[3].data);
-    //   setBusiness(allNews[2].data);
-    //   setSports(allNews[4].data);
-    //   setWorld(allNews[6].data);}
-
-
-
-  // const getValue = () => {
-  //   var array = []
-  //   allNews.forEach((news)=>{
-  //       if(news.category=="national")
-  //       setNational(news.data)
-  //       else if(news.category=="sports")
-  //       setSports(news.data)
-  //   })
-  //   return [national,sports]
-  // }
 
   if(loading)
   return (

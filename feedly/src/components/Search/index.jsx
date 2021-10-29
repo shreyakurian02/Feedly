@@ -13,6 +13,8 @@ import useDebounce from "../../common/hooks/useDebounce";
 import { NewsContext } from "../../contexts/newsFeeder";
 import SearchResult from "./SearchResult";
 import { Scrollable } from "@bigbinary/neetoui/layouts";
+import { NewsFeeder } from "../../contexts/newsFeeder";
+import { array } from "yup/lib/locale";
 
 const SearchModal = ({ onClose, setShowSearchModal }) => {
   const [searchWord, setSearchWord] = useState("");
@@ -20,19 +22,42 @@ const SearchModal = ({ onClose, setShowSearchModal }) => {
   const debouncedSearch = useDebounce(searchWord, 1000);
   const [searchResult, setSearchResult] = useState([]);
   const news = useContext(NewsContext);
+  const [dummy,setDummy] = useState([])
+  // const [index,setindex] = useState([])
 
   useEffect(async () => {
     setLoading(true);
+    let array = []
+    let searcharray = []
     setSearchResult([]);
+    setDummy([])
     news.forEach((categoryData) => {
       var presentData = categoryData.data.filter((e) => {
+        if(e.title.toLowerCase().includes(debouncedSearch.toLowerCase()))
+              array.push(categoryData.data)
         return e.title.toLowerCase().includes(debouncedSearch.toLowerCase());
+        // categoryData.data
       });
-      setSearchResult((pr) => [...pr, ...presentData]);
+      searcharray.push(presentData)
+      // setSearchResult((pr) => [...pr, ...presentData]);
+
+      // return  categoryData.data
+      // setDummy(data=>[...data,categoryData.data])
     });
-    if (searchWord == "") setSearchResult([]);
+
+
+    searcharray=searcharray.flat()
+    console.log(`sa-${searcharray.length}`)
+    console.log(array.length)
+     setDummy(array)
+     setSearchResult(searcharray)
+    if (searchWord == "") {
+      setSearchResult([])
+      setDummy([])};
     setLoading(false);
   }, [debouncedSearch]);
+
+
 
   if (!setShowSearchModal) return null;
   return ReactDOM.createPortal(
@@ -56,11 +81,11 @@ const SearchModal = ({ onClose, setShowSearchModal }) => {
             onChange={(event) => setSearchWord(event.target.value)}
           />
           {searchResult.length > 0 && (
-            <SearchResult searchResult={searchResult} />
+            <SearchResult searchResult={searchResult} dummy={dummy} setShowSearchModal={setShowSearchModal}/>
           )}
         </div>
         </div>
-    </>,
+        </>,
     document.getElementById("portal")
   );
 };
