@@ -16,6 +16,7 @@ const FilteredNews = () => {
   const [showWriteMoreModal, setShowWriteMoreModal] = useState(false);
   const [dateArticle, setDateArticle] = useState(new Date());
   const categoriesData = useContext(NewsContext);
+  const [tags,setTags] =useState([])
 
   const getDate = () => {
     var day = dateArticle.getDate();
@@ -27,22 +28,27 @@ const FilteredNews = () => {
 
   const { filteredCategories, isArchived } = useLocation().state;
 
-  useEffect(() => {
-    categoriesData.forEach((category) => {
-      setFetchData((fetchData) => [...fetchData, category]);
-    });
-  }, []);
+
+  // const {setFilteredCategories} = useLocation().data.setFilteredCategories()
+
+  useEffect(()=>{
+
+    setTags([])
+    setFetchData(categoriesData)
+    setTags(filteredCategories)
+  },[filteredCategories])
 
   useEffect(() => {
     let array = [];
-    filteredCategories.map((category) => {
+    tags.map((category) => {
       var news = fetchData.filter((element) => {
         return CATEGORIES[category] === element.category;
+
       });
       array.push(...news);
     });
     setFilteredNews([...array]);
-  }, [filteredCategories]);
+  }, [tags]);
 
   //---------------------------------------------------TO WORK ON ---------------------------------------------------
   //   useEffect(()=>{
@@ -71,8 +77,13 @@ const FilteredNews = () => {
   // },[filteredCategories])
   //---------------------------------------------------TO WORK ON ---------------------------------------------------
 
-  const handleClose = (e) => {
-    //To implement
+  const handleClose = (i) => {
+    var filtered = filteredCategories.filter((_,index) => index !== i);
+    setTags(filtered)
+    window.localStorage.setItem(
+      "filteredCategories",
+      JSON.stringify(filtered)
+    );
   };
 
   return filteredNews.length === 0 ? (
@@ -113,14 +124,15 @@ const FilteredNews = () => {
   ) : (
     <div>
       <div>
-        {filteredCategories.map((category, i) => (
+        {tags.map((category, i) => (
           <Tag
+            key={i}
             className="mr-5 mt-5"
             label={
               CATEGORIES[category][0].toUpperCase() +
               CATEGORIES[category].slice(1)
             }
-            onClose={(e) => handleClose(e)}
+            onClose={() => handleClose(i)}
           />
         ))}
         {isArchived ? (
