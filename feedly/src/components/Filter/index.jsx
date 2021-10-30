@@ -3,17 +3,29 @@ import { Pane, Typography, Button, Checkbox } from "@bigbinary/neetoui/v2";
 import { Check } from "@bigbinary/neeto-icons";
 import { Link } from "react-router-dom";
 import { CATEGORIES } from "../../contexts/constants";
+import FilteredNews from "./FilteredNews";
+import { Route, Redirect, Switch,  BrowserRouter } from "react-router-dom";
 
 const FilterPane = ({ onClose, setShowFilterPane }) => {
   const [filteredCategories, setFilteredCategories] = useState([]);
   const [isArchived, setIsArchived] = useState(false);
 
+
+
+
+
   useEffect(() => {
     setFilteredCategories(
       JSON.parse(window.localStorage.getItem("filteredCategories"))
     );
+
     setIsArchived(JSON.parse(window.localStorage.getItem("isArchived")));
   }, []);
+
+
+
+
+
 
   useEffect(() => {
     window.localStorage.setItem(
@@ -22,9 +34,17 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
     );
   }, [filteredCategories]);
 
+
+
+
+
+
   useEffect(() => {
     window.localStorage.setItem("isArchived", isArchived);
   }, [isArchived]);
+
+
+
 
   const handleFilter = (e) => {
     let id = e.target.id;
@@ -36,6 +56,8 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
       setFilteredCategories(filtered);
     }
   };
+
+
 
   const handleArchived = (e) => {
     let id = e.target.id;
@@ -105,6 +127,9 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
               label="Save Changes"
               onClick={() => setShowFilterPane(false)}
             />
+            {/* <Switch>
+            <Route exact path="/filtered" component={<FilteredNews setFilteredCategories={setFilteredCategories} filteredCategories={filteredCategories} isArchived={isArchived}/>}/>
+          </Switch> */}
           </Link>
           <Button
             style="text"
