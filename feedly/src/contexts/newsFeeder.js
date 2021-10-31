@@ -23,31 +23,24 @@ export const NewsFeeder = (props) => {
       setLoading(true);
 
       const nationalData = await axios.get("https://inshortsapi.vercel.app/news?category=national");
-      console.log(nationalData)
       setNational(nationalData.data);
 
       const businessData = await axios.get("https://inshortsapi.vercel.app/news?category=business");
-      console.log(businessData)
       setBusiness(businessData.data);
 
       const sportsData = await axios.get("https://inshortsapi.vercel.app/news?category=sports");
-      console.log(sportsData)
       setSports(sportsData.data);
 
       const worldData= await axios.get("https://inshortsapi.vercel.app/news?category=world");
-      console.log(worldData)
       setWorld(worldData.data)
 
       const allData= await axios.get("https://inshortsapi.vercel.app/news?category=all");
-      console.log(allData)
       setAll(allData.data)
 
       const technologyData= await axios.get("https://inshortsapi.vercel.app/news?category=technology");
-      console.log(technologyData)
       setTech(technologyData.data)
 
       const scienceData= await axios.get("https://inshortsapi.vercel.app/news?category=science");
-      console.log(scienceData)
       setScience(scienceData.data)
 
       setLoading(false);
@@ -66,8 +59,7 @@ export const NewsFeeder = (props) => {
 
   return (
     <>
-    <NewsContext.Provider value={[national,sports,business,world,technology,science,all]}>
-
+    <NewsContext.Provider value={[all,science,business,national,sports,world,technology]}>
       {props.children}
     </NewsContext.Provider>
     </>

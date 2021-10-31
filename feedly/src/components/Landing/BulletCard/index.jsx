@@ -13,7 +13,7 @@ const getCardNumbers = () => {
 
   else if(bulletLength!=null)
   {
-    numberOfCards=bulletLength-1 + 5
+    numberOfCards=bulletLength-1 
   }
 
   else
