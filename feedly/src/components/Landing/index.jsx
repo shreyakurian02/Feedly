@@ -12,10 +12,13 @@ const Landing = () => {
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [showFilterPane, setShowFilterPane] = useState(false);
   const [showSubscribeModal, setShowSubsribeModal] = useState(false);
-  const as= useContext(NewsContext)
+  const as = useContext(NewsContext);
 
   useEffect(() => {
-    localStorage.setItem("filteredCategories", JSON.stringify(['1','3','4','5']));
+    localStorage.setItem(
+      "filteredCategories",
+      JSON.stringify(["1", "3", "4", "5"])
+    );
     localStorage.setItem("isArchived", false);
   }, []);
 
@@ -82,7 +85,7 @@ const Landing = () => {
 
       {showFilterPane && (
         <FilterPane
-        as={as}
+          as={as}
           setShowFilterPane={setShowFilterPane}
           onClose={() => {
             setShowFilterPane(false);

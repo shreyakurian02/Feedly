@@ -1,34 +1,19 @@
-import React, { useContext, useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Pane, Typography, Button, Checkbox } from "@bigbinary/neetoui/v2";
 import { Check } from "@bigbinary/neeto-icons";
 import { Link } from "react-router-dom";
 import { CATEGORIES } from "../../contexts/constants";
-import FilteredNews from "./FilteredNews";
-import { Route, Redirect, Switch,  BrowserRouter } from "react-router-dom";
-import { NewsContext } from "../../contexts/newsFeeder";
 
-
-const FilterPane = ({ onClose, setShowFilterPane,as }) => {
+const FilterPane = ({ onClose, setShowFilterPane, as }) => {
   const [filteredCategories, setFilteredCategories] = useState([]);
   const [isArchived, setIsArchived] = useState(false);
- 
-
-
-
-
 
   useEffect(() => {
     setFilteredCategories(
       JSON.parse(window.localStorage.getItem("filteredCategories"))
     );
-
     setIsArchived(JSON.parse(window.localStorage.getItem("isArchived")));
   }, []);
-
-
-
-
-
 
   useEffect(() => {
     window.localStorage.setItem(
@@ -37,17 +22,9 @@ const FilterPane = ({ onClose, setShowFilterPane,as }) => {
     );
   }, [filteredCategories]);
 
-
-
-
-
-
   useEffect(() => {
     window.localStorage.setItem("isArchived", isArchived);
   }, [isArchived]);
-
-
-
 
   const handleFilter = (e) => {
     let id = e.target.id;
@@ -59,8 +36,6 @@ const FilterPane = ({ onClose, setShowFilterPane,as }) => {
       setFilteredCategories(filtered);
     }
   };
-
-
 
   const handleArchived = (e) => {
     let id = e.target.id;
@@ -91,7 +66,7 @@ const FilterPane = ({ onClose, setShowFilterPane,as }) => {
                   }
                   label={
                     <Typography style="h5" className="neeto-ui-text-black">
-                      {category[0].toUpperCase()+category.slice(1)}
+                      {category[0].toUpperCase() + category.slice(1)}
                     </Typography>
                   }
                   onChange={(e) => {
@@ -121,7 +96,7 @@ const FilterPane = ({ onClose, setShowFilterPane,as }) => {
               state: {
                 filteredCategories: filteredCategories,
                 isArchived: isArchived,
-                as:as,
+                as: as,
               },
             }}
           >
@@ -131,9 +106,6 @@ const FilterPane = ({ onClose, setShowFilterPane,as }) => {
               label="Save Changes"
               onClick={() => setShowFilterPane(false)}
             />
-            {/* <Switch>
-            <Route exact path="/filtered" component={<FilteredNews setFilteredCategories={setFilteredCategories} filteredCategories={filteredCategories} isArchived={isArchived}/>}/>
-          </Switch> */}
           </Link>
           <Button
             style="text"
