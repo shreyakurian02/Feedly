@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./Card";
 
 const BulletCard = ({ articleSet, category,MainArticleId,filter,bulletLength }) => {
-const NUMBER_OF_CARDS = filter? 8: 4
+
 
 const getCardNumbers = () => {
   let numberOfCards
@@ -13,13 +13,11 @@ const getCardNumbers = () => {
 
   else if(bulletLength!=null)
   {
-    numberOfCards=bulletLength-1
-    console.log("where")
+    numberOfCards=bulletLength-1 + 5
   }
 
   else
-  {numberOfCards = 4
-  console.log("here")}
+  numberOfCards = 4
 
   return numberOfCards
 
