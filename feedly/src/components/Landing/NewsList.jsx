@@ -8,10 +8,10 @@ const NewsList = () => {
 
   return (
   <>
-  <NewsCard articleSet={national.data} category="National" filter={false}/>
-   <NewsCard articleSet={sports.data} category="Sports" filter={false}/>
-   <NewsCard articleSet={world.data} category="World" filter={false}/>
-   <NewsCard articleSet={business.data} category="Business" filter={false}/>
+  <NewsCard articleSet={national.data} category="National" filter={false} bulletLength={null}/>
+   <NewsCard articleSet={sports.data} category="Sports" filter={false} bulletLength={null}/>
+   <NewsCard articleSet={world.data} category="World" filter={false} bulletLength={null}/>
+   <NewsCard articleSet={business.data} category="Business" filter={false} bulletLength={null}/>
   </>
   );
 }

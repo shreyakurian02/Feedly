@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState} from "react";
 import { Pane, Typography, Button, Checkbox } from "@bigbinary/neetoui/v2";
 import { Check } from "@bigbinary/neeto-icons";
 import { Link } from "react-router-dom";
 import { CATEGORIES } from "../../contexts/constants";
 import FilteredNews from "./FilteredNews";
 import { Route, Redirect, Switch,  BrowserRouter } from "react-router-dom";
+import { NewsContext } from "../../contexts/newsFeeder";
 
-const FilterPane = ({ onClose, setShowFilterPane }) => {
+
+const FilterPane = ({ onClose, setShowFilterPane,as }) => {
   const [filteredCategories, setFilteredCategories] = useState([]);
   const [isArchived, setIsArchived] = useState(false);
+ 
 
 
 
@@ -118,6 +121,7 @@ const FilterPane = ({ onClose, setShowFilterPane }) => {
               state: {
                 filteredCategories: filteredCategories,
                 isArchived: isArchived,
+                as:as,
               },
             }}
           >

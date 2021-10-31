@@ -9,13 +9,14 @@ import BulletCard from "../Landing/BulletCard";
 import { NewsContext } from "../../contexts/newsFeeder";
 import { MONTHS } from "./constants";
 import { CATEGORIES } from "../../contexts/constants";
+import axios from "axios";
 
 const FilteredNews = () => {
   const [filteredNews, setFilteredNews] = useState([]);
   const [fetchData, setFetchData] = useState([]);
   const [showWriteMoreModal, setShowWriteMoreModal] = useState(false);
   const [dateArticle, setDateArticle] = useState(new Date());
-  const categoriesData = useContext(NewsContext);
+  const categoriesData = useContext(NewsContext)
   const [tags,setTags] =useState([])
 
   const getDate = () => {
@@ -28,63 +29,58 @@ const FilteredNews = () => {
 
   const { filteredCategories, isArchived } = useLocation().state;
 
+  const getFilteredNews = (isArchivedCond) => {
 
-  // const {setFilteredCategories} = useLocation().data.setFilteredCategories()
+    var filtered = tags.map((category) => {
+      var news = categoriesData.filter((element) => {
+        return CATEGORIES[category] === element.category;
+      });
+      return (news)
+
+    });
+
+    console.log(categoriesData[4].data.length)
+    filtered=filtered.flat()
+
+    if(isArchivedCond) {
+      setFilteredNews(filtered);
+    }
+
+
+  else if(!isArchivedCond){
+    let isArchivedNews=[]
+    var filter = filtered.map((news1) =>{
+          var newsAll = news1.data.filter((news2)=>{return news2.date.split(",")[0]===getDate()})
+          isArchivedNews.push({"category": news1.category,"data":newsAll})
+          return news1
+     })
+
+     setFilteredNews(isArchivedNews)
+  }
+  }
+
 
   useEffect(()=>{
-
-    setTags([])
-    setFetchData(categoriesData)
     setTags(filteredCategories)
   },[filteredCategories])
 
+
+
+
   useEffect(() => {
-    let array = [];
-    tags.map((category) => {
-      var news = fetchData.filter((element) => {
-        return CATEGORIES[category] === element.category;
+   getFilteredNews(isArchived)
+  },[isArchived,tags]);
 
-      });
-      array.push(...news);
-    });
-    setFilteredNews([...array]);
-  }, [tags]);
-
-  //---------------------------------------------------TO WORK ON ---------------------------------------------------
-  //   useEffect(()=>{
-  //     const fetchNews = async (category) => {
-  //     const data = await axios.get(`https://inshortsapi.vercel.app/news?category=${categories[category]}`)
-  //     if(!filteredNews.includes(data.data)) setFilteredNews( filteredNews => [...filteredNews, data.data])
-  //   }
-  //   setFilteredNews([])
-  //   filteredCategories.forEach((category)=>fetchNews(category))
-
-  //   if (!isArchived && filteredNews.length>0){
-
-  //     var filter = filteredNews.map((news1) =>{
-  //           var newsAll = news1.data.filter((news2)=>{return news2.date.split(",")[0]===getDate()})
-  //           news1.data = [...newsAll]
-  //           console.log(`newsAll- ${newsAll}`)
-  //           return news1
-  //      })
-  //      console.log(JSON.stringify(filter))
-  //      console.log(`filterd-${filteredNews}`)
-  //     //  setFilteredNews([])
-  //      setFilteredNews([...filter])
-
-  //   }
-
-  // },[filteredCategories])
-  //---------------------------------------------------TO WORK ON ---------------------------------------------------
 
   const handleClose = (i) => {
-    var filtered = filteredCategories.filter((_,index) => index !== i);
+    var filtered = tags.filter((_,index) => index !== i);
     setTags(filtered)
     window.localStorage.setItem(
       "filteredCategories",
       JSON.stringify(filtered)
     );
   };
+  console.log("return")
 
   return filteredNews.length === 0 ? (
     <>
@@ -106,12 +102,13 @@ const FilteredNews = () => {
           />
         </div>
       </div>
-      {fetchData.length != 0 && (
+      {categoriesData.length != 0 && (
         <BulletCard
           category="all"
-          articleSet={fetchData[0].data}
+          articleSet={categoriesData[0].data}
           MainArticleId={0}
           filter={true}
+          bulletLength = {null}
         />
       )}
 
@@ -123,8 +120,7 @@ const FilteredNews = () => {
     </>
   ) : (
     <div>
-      <div>
-        {tags.map((category, i) => (
+<div>        {tags.map((category, i) => (
           <Tag
             key={i}
             className="mr-5 mt-5"
@@ -146,8 +142,9 @@ const FilteredNews = () => {
 
       {filteredNews.length > 0 &&
         filteredNews.map((news, i) => (
-          <div>
+          <div key={i}>
             <NewsCard
+              bulletLength = {news.data.length}
               articleSet={news.data}
               category={news.category[0].toUpperCase() + news.category.slice(1)}
               filter={true}

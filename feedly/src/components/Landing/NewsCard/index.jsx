@@ -3,8 +3,9 @@ import { Typography,Button} from "@bigbinary/neetoui/v2";
 import BulletCard from "../BulletCard";
 import { Link } from "react-router-dom";
 
-const NewsCard = ({ articleSet, category,filter}) => {
+const NewsCard = ({ articleSet, category,filter,bulletLength}) => {
   return (
+    articleSet.length>0 && (
     <>
       <div className="border-b pt-3 pb-12">
         <div className="py-10">
@@ -42,8 +43,8 @@ const NewsCard = ({ articleSet, category,filter}) => {
           </div>
         </div>
       </div>
-      <BulletCard articleSet={articleSet} category={category} MainArticleId={0} filter={filter}/>
-    </>
+      <BulletCard articleSet={articleSet} category={category} MainArticleId={0} filter={filter} bulletLength={bulletLength}/>
+    </>)
   );
 };
 
