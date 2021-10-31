@@ -59,7 +59,7 @@ export const NewsFeeder = (props) => {
 
   return (
     <>
-    <NewsContext.Provider value={[national,sports,business,world,technology,science,all]}>
+    <NewsContext.Provider value={[all,science,business,national,sports,world,technology]}>
       {props.children}
     </NewsContext.Provider>
     </>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Header } from "@bigbinary/neetoui/v2/layouts";
 import { Button } from "@bigbinary/neetoui/v2";
 import { Search, Notification, Filter } from "@bigbinary/neeto-icons";
@@ -6,14 +6,19 @@ import { Typography } from "@bigbinary/neetoui/v2";
 import SearchModal from "../Search";
 import FilterPane from "../Filter";
 import Subscribe from "./Subscribe";
+import { NewsContext } from "../../contexts/newsFeeder";
 
 const Landing = () => {
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [showFilterPane, setShowFilterPane] = useState(false);
   const [showSubscribeModal, setShowSubsribeModal] = useState(false);
+  const as = useContext(NewsContext);
 
   useEffect(() => {
-    localStorage.setItem("filteredCategories", JSON.stringify([]));
+    localStorage.setItem(
+      "filteredCategories",
+      JSON.stringify(["1", "3", "4", "5"])
+    );
     localStorage.setItem("isArchived", false);
   }, []);
 
@@ -80,6 +85,7 @@ const Landing = () => {
 
       {showFilterPane && (
         <FilterPane
+          as={as}
           setShowFilterPane={setShowFilterPane}
           onClose={() => {
             setShowFilterPane(false);

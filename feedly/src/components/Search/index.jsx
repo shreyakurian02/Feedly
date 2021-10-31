@@ -1,12 +1,8 @@
 
-import React, {
-  useEffect,
-  useState,
-  useContext,
-} from "react";
+import React, {useEffect, useState, useContext,} from "react";
 import ReactDOM from "react-dom";
-import { Input, Button } from "@bigbinary/neetoui/v2";
-import { Search, Close } from "@bigbinary/neeto-icons";
+import { Input} from "@bigbinary/neetoui/v2";
+import { Search} from "@bigbinary/neeto-icons";
 import useDebounce from "../../common/hooks/useDebounce";
 import { NewsContext } from "../../contexts/newsFeeder";
 import SearchResult from "./SearchResult";
@@ -18,16 +14,25 @@ const SearchModal = ({ onClose, setShowSearchModal }) => {
   const debouncedSearch = useDebounce(searchWord, 1000);
   const [searchResult, setSearchResult] = useState([]);
   const news = useContext(NewsContext);
+  const [searchData,setSearchData] = useState([])
   const [searchRelatedData,setSearchRelatedData] = useState([])
+
+
+  useEffect(()=>{
+    let searchFromData = []
+    let categories = JSON.parse(window.localStorage.getItem("filteredCategories"))
+    categories.forEach((category)=>searchFromData.push(news[category]))
+    setSearchData(searchFromData)
+  })
+
 
   useEffect(async () => {
     setLoading(true);
     var searchRelatedArray = []
     var searchResultArray = []
-
     setSearchResult([]);
     setSearchRelatedData([])
-    news.forEach((categoryData) => {
+    searchData.forEach((categoryData) => {
       var presentData = categoryData.data.filter((e) =>{
         if(e.title.toLowerCase().includes(debouncedSearch.toLowerCase()))
         searchRelatedArray.push(categoryData.data)
@@ -44,7 +49,7 @@ const SearchModal = ({ onClose, setShowSearchModal }) => {
     if (searchWord === "") {
       setSearchResult([])
       setSearchRelatedData([])};
-    setLoading(false);
+      setLoading(false);
   }, [debouncedSearch]);
 
 
@@ -52,7 +57,7 @@ const SearchModal = ({ onClose, setShowSearchModal }) => {
   if (!setShowSearchModal) return null;
   return ReactDOM.createPortal(
     <>
-      <div className="fixed inset-0 bg-black bg-opacity-70" />
+      <div className="fixed inset-0 bg-black bg-opacity-70"  onClick={()=>setShowSearchModal(false)}/>
       <div className="h-full align-middle">
         <div className="absolute -translate-x-5 top-1/3 w-1/2 border bg-white left-1/4 px-3 overflow-y-scroll -translate-y-2/4 ">
           <Input
@@ -61,13 +66,6 @@ const SearchModal = ({ onClose, setShowSearchModal }) => {
             size="large"
             className="w-full"
             prefix={<Search size={16} />}
-            suffix={
-              <Button
-                style="icon"
-                icon={() => <Close size={18} />}
-                onClick={onClose}
-              />
-            }
             onChange={(event) => setSearchWord(event.target.value)}
           />
           {searchResult.length > 0 && (
