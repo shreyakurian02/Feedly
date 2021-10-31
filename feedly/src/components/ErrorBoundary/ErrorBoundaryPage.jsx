@@ -11,15 +11,15 @@ const ErrorBoundaryPage = () => {
   return (
 
     <>
-    <div className="flex justify center flex-col mt-40 items-center border border-black">
-      <div className="border border-black flex justify-center">
+    <div className="flex justify center flex-col mt-40 items-cente">
+      <div className="flex justify-center">
         <img src={errorImage}/>
       </div>
-      <div className="flex justify-center items-center flex-col border border-black mt-5 space-y-5">
+      <div className="flex justify-center items-center flex-col mt-5 space-y-5">
       <Typography style="h3" className="items-center">You have landed somewhere unknown</Typography>
       <Button
       style="secondary"
-      icon={()=> <Home className="mr-3"/>}
+      icon={()=> <Home size={15} className="mr-3"/>}
       iconPosition="left"
       label="Take me home"
       onClick={()=>(window.location.href = "/newsList")}
