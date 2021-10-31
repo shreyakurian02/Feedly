@@ -1,13 +1,13 @@
 import React from "react";
 import { Typography, Button} from "@bigbinary/neetoui/v2";
 import { Highlight } from "@bigbinary/neeto-icons";
-import noNews from "./noNews.png";
+import NoNews from "./NoNews.png"
 
-const NoNews = ({setShowWriteMoreModal}) => {
+const NoNewsArticle = ({setShowWriteMoreModal}) => {
   return (
 <div className="flex justify-center py-16">
             <div className="space-y-5 flex flex-col justify-center">
-              <img src={noNews} alt="No News" className="" />
+              <img src={NoNews} alt="No News" className="" />
               <Typography style="h3">No News Articles Found</Typography>
               <Button
                 className="mx-auto"
@@ -26,4 +26,4 @@ const NoNews = ({setShowWriteMoreModal}) => {
   )
 }
 
-export default NoNews;
+export default NoNewsArticle;

@@ -6,7 +6,7 @@ import BulletCard from "../Landing/BulletCard";
 import { NewsContext } from "../../contexts/newsFeeder";
 import { MONTHS } from "./constants";
 import { CATEGORIES } from "../../contexts/constants";
-import NoNews from "./NoNews";
+import NoNewsArticle from "./NoNewsArticle";
 import Tags from "./Tags";
 
 const FilteredNews = () => {
@@ -85,7 +85,7 @@ const FilteredNews = () => {
       />
       {getNewsLength() ? (
         <>
-          <NoNews setShowWriteMoreModal={setShowWriteMoreModal} />
+          <NoNewsArticle setShowWriteMoreModal={setShowWriteMoreModal} />
           <BulletCard
             category="all"
             articleSet={categoriesData[0].data}
