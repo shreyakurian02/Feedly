@@ -18,6 +18,7 @@ const FilteredNews = () => {
   const [dateArticle, setDateArticle] = useState(new Date());
   const categoriesData = useContext(NewsContext)
   const [tags,setTags] =useState([])
+  const [isArchivedTag,setIsArchivedTag] = useState(false)
 
   const getDate = () => {
     var day = dateArticle.getDate();
@@ -62,14 +63,15 @@ const FilteredNews = () => {
 
   useEffect(()=>{
     setTags(filteredCategories)
+    setIsArchivedTag(isArchived)
   },[filteredCategories])
 
 
 
 
   useEffect(() => {
-   getFilteredNews(isArchived)
-  },[isArchived,tags]);
+   getFilteredNews(isArchivedTag)
+  },[isArchived,tags,isArchivedTag]);
 
 
   const handleClose = (i) => {
@@ -80,6 +82,21 @@ const FilteredNews = () => {
       JSON.stringify(filtered)
     );
   };
+
+
+  const handleArchivedClose = () => {
+    console.log("reached here")
+    window.localStorage.setItem(
+      "isArchived",
+      JSON.stringify(false)
+    );
+
+    setIsArchivedTag(false)
+  };
+
+
+
+
   console.log("return")
 
   return filteredNews.length === 0 ? (
@@ -131,11 +148,11 @@ const FilteredNews = () => {
             onClose={() => handleClose(i)}
           />
         ))}
-        {isArchived ? (
+        {isArchivedTag ? (
           <Tag
             className="mr-5 mt-5"
             label="Archived"
-            onClose={(e) => handleClose(e)}
+            onClose={() => handleArchivedClose()}
           />
         ) : null}
       </div>
