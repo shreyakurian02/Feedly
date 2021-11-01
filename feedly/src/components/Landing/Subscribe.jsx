@@ -1,14 +1,15 @@
 import React from "react";
-import { Modal } from "@bigbinary/neetoui/v2";
-import { Formik, Form } from "formik";
-import { Button, Typography } from "@bigbinary/neetoui/v2";
-import { Input } from "@bigbinary/neetoui/v2/formik";
-import { SUBSCRIPPTION_INITIAL_VALUES, VALIDATION_SCHEMA } from "./constants";
 import axios from "axios";
+import { Modal,Button, Typography } from "@bigbinary/neetoui/v2";
+import { Formik, Form } from "formik";
+import { Input } from "@bigbinary/neetoui/v2/formik";
+
+import { SUBSCRIPPTION_INITIAL_VALUES, VALIDATION_SCHEMA } from "./constants";
+
 import subscribe from "./subscribe.png";
 
 const Subscribe = ({ setShowSubsribeModal }) => {
-  const URL = "https://webhook.site/9f54337a-cb5f-43e8-bb10-6caa824fb55a";
+  const URL = process.env.REACT_APP_WEBHOOK_URL;
 
   const handleSubmit = (values) => {
     axios.post(URL, values);

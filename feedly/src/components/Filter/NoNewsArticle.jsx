@@ -1,6 +1,7 @@
 import React from "react";
 import { Typography, Button} from "@bigbinary/neetoui/v2";
 import { Highlight } from "@bigbinary/neeto-icons";
+
 import NoNews from "./NoNews.png"
 
 const NoNewsArticle = ({setShowWriteMoreModal}) => {

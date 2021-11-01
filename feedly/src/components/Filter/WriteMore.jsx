@@ -7,8 +7,7 @@ import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./constants";
 import axios from "axios";
 
 const WriteMore = ({ setShowWriteMoreModal }) => {
-  const URL = "https://webhook.site/9f54337a-cb5f-43e8-bb10-6caa824fb55a";
-
+  const URL = process.env.REACT_APP_WEBHOOK_URL
   const handleSubmit = (values) => {
     axios.post(URL, values);
     setShowWriteMoreModal(false);

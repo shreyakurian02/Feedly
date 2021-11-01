@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Pane, Typography, Button, Checkbox } from "@bigbinary/neetoui/v2";
 import { Check } from "@bigbinary/neeto-icons";
 import { Link } from "react-router-dom";
+
 import { CATEGORIES } from "../../contexts/constants";
 
 const FilterPane = ({ onClose, setShowFilterPane, as }) => {

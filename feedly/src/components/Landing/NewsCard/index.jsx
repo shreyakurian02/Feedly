@@ -1,7 +1,9 @@
 import React from "react";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
-import BulletCard from "../BulletCard";
 import { Link } from "react-router-dom";
+
+import BulletCard from "../BulletCard";
+
 
 const NewsCard = ({ articleSet, category, filter, bulletLength }) => {
   return (

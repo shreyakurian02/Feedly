@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router";
+
 import NewsCard from "../Landing/NewsCard";
 import WriteMore from "./WriteMore";
 import BulletCard from "../Landing/BulletCard";
@@ -22,6 +23,7 @@ const FilteredNews = () => {
   const getDate = () => {
     let todayDate = new Date();
     var day = todayDate.getDate();
+    if(day<10) day = ("0" + day)
     var month = todayDate.getMonth();
     var year = todayDate.getFullYear();
     todayDate = `${day} ${MONTHS[month]} ${year}`;

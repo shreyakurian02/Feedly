@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+
 import NewsCard from "./NewsCard";
 import { NewsContext } from "../../contexts/newsFeeder";
 

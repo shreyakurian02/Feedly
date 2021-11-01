@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { Link } from "react-router-dom";
+import { Typography, Button } from "@bigbinary/neetoui/v2";
+
 import { NewsContext } from "../../contexts/newsFeeder";
 
 const SearchResult = ({ searchResult, searchRelatedData, setShowSearchModal }) => {
