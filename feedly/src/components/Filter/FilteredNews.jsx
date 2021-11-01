@@ -22,9 +22,11 @@ const FilteredNews = () => {
   const getDate = () => {
     let todayDate = new Date();
     var day = todayDate.getDate();
+    if(day<10) day = ("0" + day)
     var month = todayDate.getMonth();
     var year = todayDate.getFullYear();
     todayDate = `${day} ${MONTHS[month]} ${year}`;
+    console.log(todayDate)
     return todayDate;
   };
 
@@ -52,6 +54,7 @@ const FilteredNews = () => {
   };
 
   const getNewsLength = () => {
+    console.log(filteredNews)
     return filteredNews.every((data) => data.data.length === 0);
   };
 
@@ -85,6 +88,7 @@ const FilteredNews = () => {
       />
       {getNewsLength() ? (
         <>
+        {console.log(getNewsLength())}
           <NoNewsArticle setShowWriteMoreModal={setShowWriteMoreModal} />
           <BulletCard
             category="all"

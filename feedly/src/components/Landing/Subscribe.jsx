@@ -1,10 +1,11 @@
 import React from "react";
-import { Modal } from "@bigbinary/neetoui/v2";
-import { Formik, Form } from "formik";
-import { Button, Typography } from "@bigbinary/neetoui/v2";
-import { Input } from "@bigbinary/neetoui/v2/formik";
-import { SUBSCRIPPTION_INITIAL_VALUES, VALIDATION_SCHEMA } from "./constants";
 import axios from "axios";
+import { Modal,Button, Typography } from "@bigbinary/neetoui/v2";
+import { Formik, Form } from "formik";
+import { Input } from "@bigbinary/neetoui/v2/formik";
+
+import { SUBSCRIPPTION_INITIAL_VALUES, VALIDATION_SCHEMA } from "./constants";
+
 import subscribe from "./subscribe.png";
 
 const Subscribe = ({ setShowSubsribeModal }) => {

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Header } from "@bigbinary/neetoui/v2/layouts";
-import { Button } from "@bigbinary/neetoui/v2";
+import { Button, Typography } from "@bigbinary/neetoui/v2";
 import { Search, Notification, Filter } from "@bigbinary/neeto-icons";
-import { Typography } from "@bigbinary/neetoui/v2";
+
 import SearchModal from "../Search";
 import FilterPane from "../Filter";
 import Subscribe from "./Subscribe";

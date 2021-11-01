@@ -2,6 +2,7 @@ import React from "react";
 import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { Home } from "@bigbinary/neeto-icons";
 import { useHistory } from "react-router-dom";
+
 import errorImage from "./errorImage.png";
 
 const ErrorBoundaryPage = () => {

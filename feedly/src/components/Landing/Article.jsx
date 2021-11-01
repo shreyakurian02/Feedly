@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Typography, Button } from "@bigbinary/neetoui/v2";
 import { useLocation } from "react-router";
-import BulletCard from "./BulletCard";
+import { Typography, Button,PageLoader } from "@bigbinary/neetoui/v2";
 import { Copy } from "@bigbinary/neeto-icons";
-import { PageLoader } from "@bigbinary/neetoui/v2";
+
 import { NewsContext } from "../../contexts/newsFeeder";
+import BulletCard from "./BulletCard";
 
 const Article = () => {
   const { articleSet, index } = useLocation().state;
