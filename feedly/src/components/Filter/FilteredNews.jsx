@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router";
+
 import NewsCard from "../Landing/NewsCard";
 import WriteMore from "./WriteMore";
 import BulletCard from "../Landing/BulletCard";
@@ -26,7 +27,6 @@ const FilteredNews = () => {
     var month = todayDate.getMonth();
     var year = todayDate.getFullYear();
     todayDate = `${day} ${MONTHS[month]} ${year}`;
-    console.log(todayDate)
     return todayDate;
   };
 
@@ -54,7 +54,6 @@ const FilteredNews = () => {
   };
 
   const getNewsLength = () => {
-    console.log(filteredNews)
     return filteredNews.every((data) => data.data.length === 0);
   };
 
@@ -88,7 +87,6 @@ const FilteredNews = () => {
       />
       {getNewsLength() ? (
         <>
-        {console.log(getNewsLength())}
           <NoNewsArticle setShowWriteMoreModal={setShowWriteMoreModal} />
           <BulletCard
             category="all"
